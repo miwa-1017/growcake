@@ -1,0 +1,7 @@
+ja:
+  enums:
+    exercise_log:
+      category:
+        strength: "筋トレ"
+        cardio: "有酸素運動"
+        stretch: "ストレッチ"

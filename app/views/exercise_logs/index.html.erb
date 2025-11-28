@@ -1,0 +1,15 @@
+<h1>運動ログ一覧</h1>
+
+<%= link_to "新規入力", new_exercise_log_path, class: "btn btn-primary" %>
+
+<div style="font-size: 20px; margin-bottom: 15px;">
+  🎉 <strong><%= current_user.total_points %></strong> pt たまってるよ 🍰✨
+</div>
+
+<ul>
+  <% @exercise_logs.each do |log| %>
+    <li>
+  🍀 <%= I18n.t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分）
+    </li>
+  <% end %>
+</ul>
