@@ -1,1 +1,113 @@
 @use '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #f6f1e2;
+  color: #5B4A42;
+}
+h1, h2 {
+  color: #4A3B35;
+  font-weight: 600;
+}
+
+body {
+  background-color: #f6f1e2; 
+  color: #5B4A42;           
+  line-height: 1.8;
+}
+
+.home-wrapper {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  padding: 0 16px;
+}
+
+.home-copy {
+  font-size: 17px;
+  margin-bottom: 24px;
+}
+
+.home-copy p {
+  margin-bottom: 0.4rem;
+}
+
+.home-actions .btn {
+  min-width: 140px;
+}
+
+.home-logo {
+  width: 400px; 
+  margin: 20px auto;
+  display: block;
+}
+
+.home-sub-visual img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.header-logo img {
+  height: 150px;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .header-logo img {
+    height: 40px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+}
+
+.btn-primary {
+  background-color: #E58C6C !important;
+  border-color: #E58C6C !important;
+}
+
+.btn-primary:hover {
+  background-color: #d47a5b !important;
+  border-color: #d47a5b !important;
+}
+
+.btn-outline-secondary {
+  border-color: #E58C6C !important;
+  color: #E58C6C !important;
+}
+
+.btn-outline-secondary:hover {
+  background-color: #E58C6C !important;
+  color: #fff !important;
+}
+
+.header-nav .nav-link {
+  color: #D26A54 !important; 
+  font-weight: 500;
+}
+
+.header-nav .nav-link:hover {
+  color: #A7483A !important; 
+}
+
+.header-nav .btn {
+  background-color: transparent !important;
+  border: none !important;
+  color: #D26A54 !important;
+  font-weight: 600;
+  padding: 0 !important;
+}
+
+.header-nav .btn:hover {
+  color: #A7483A !important;
+}
+
+.btn-primary {
+  transition: all 0.25s ease; 
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px); 
+  background-color: #D46A6C;  
+}
