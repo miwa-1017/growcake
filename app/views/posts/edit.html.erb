@@ -1,0 +1,17 @@
+<h1>編集</h1>
+
+<%= form_with model: @post, local: true do |f| %>
+  <div>
+    <%= f.label :title, "タイトル" %>
+    <%= f.text_field :title %>
+  </div>
+
+  <div>
+    <%= f.label :body, "内容" %>
+    <%= f.text_area :body %>
+  </div>
+
+  <%= f.submit "更新", class: "btn btn-primary" %>
+<% end %>
+
+<%= link_to "戻る", post_path(@post) %>

@@ -1,0 +1,15 @@
+<h1>運動ログ追加</h1>
+
+<%= form_with model: @exercise_log, local: true do |f| %>
+  <div>
+    <%= f.label :category, "運動の種類" %>
+    <%= f.select :category, ExerciseLog.categories.keys.map { |k| [I18n.t("enums.exercise_log.category.#{k}"), k] } %>
+  </div>
+
+  <div>
+    <%= f.label :minutes, "時間（分）" %>
+    <%= f.number_field :minutes, min: 1 %>
+  </div>
+
+  <%= f.submit "保存", class: "btn btn-primary" %>
+<% end %>
