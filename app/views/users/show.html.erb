@@ -1,0 +1,15 @@
+<div class="exercise-wrapper text-center">
+  <h2><%= @user.name %> さんのページ</h2>
+
+  <% if @user.email == "guest@example.com" %>
+    <p>メールアドレス：非公開</p>
+  <% else %>
+    <p>メールアドレス：<%= @user.email %></p>
+  <% end %>
+
+  <% unless @user.email == "guest@example.com" %>
+    <%= link_to "編集する", edit_user_registration_path, class: "btn mt-3" %>
+  <% end %>
+
+  <%= link_to "筋トレの記録を見る", exercise_logs_path, class: "btn btn-outline mt-3" %>
+</div>

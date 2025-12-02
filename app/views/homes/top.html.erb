@@ -18,13 +18,17 @@
         </p>
 
         <div class="mt-3">
-          <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary me-2" %>
-          <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline-secondary" %>
+          <% if user_signed_in? %>
+            <%= link_to "マイページ", mypage_path, class: "btn me-2" %>
+          <% else %>
+            <%= link_to "新規登録", new_user_registration_path, class: "btn btn-primary me-2" %>
+            <%= link_to "ログイン", new_user_session_path, class: "btn btn-outline" %>
+          <% end %>
         </div>
       </div>
 
     </div>
-  </div> <!-- ←ここでcontainer終わり -->
+  </div> 
 
   <!-- 🍓下の画像（右寄せ） -->
   <div class="home-sub-visual d-flex justify-content-end me-5 mt-4">

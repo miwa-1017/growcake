@@ -1,15 +1,20 @@
-<h1>運動ログ一覧</h1>
+<div class="exercise-wrapper text-center">
+  <h1 class="exercise-title">運動ログ一覧</h1>
 
-<%= link_to "新規入力", new_exercise_log_path, class: "btn btn-primary" %>
-
-<div style="font-size: 20px; margin-bottom: 15px;">
-  🎉 <strong><%= current_user.total_points %></strong> pt たまってるよ 🍰✨
-</div>
-
-<ul>
-  <% @exercise_logs.each do |log| %>
-    <li>
-  🍀 <%= I18n.t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分）
-    </li>
+  <% if current_user.email == "guest@example.com" && current_user.exercise_logs.exists? %>
+    <p>体験版モードです🍰</p>
+    <p>これ以上投稿するには会員登録してください✨</p>
+  <% else %>
+    <%= link_to "新規入力", new_exercise_log_path, class: "btn btn-primary" %>
   <% end %>
-</ul>
+
+  <p><%= current_user.total_points %> pt たまってるよ💪✨</p>
+
+  <ul>
+    <% @exercise_logs.each do |log| %>
+      <li>
+        <%= I18n.t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分）
+      </li>
+    <% end %>
+  </ul>
+</div>
