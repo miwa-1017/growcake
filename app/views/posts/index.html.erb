@@ -1,0 +1,17 @@
+<h1>投稿一覧</h1>
+
+<%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
+
+<ul>
+  <% @posts.each do |post| %>
+    <li>
+      <%= post.title %>
+      │
+      <%= link_to "詳細", post_path(post) %>
+      │
+      <%= link_to "編集", edit_post_path(post) %>
+      │
+      <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
+    </li>
+  <% end %>
+</ul>

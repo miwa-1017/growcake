@@ -1,0 +1,235 @@
+@use '~bootstrap/scss/bootstrap';
+
+body {
+  background-color: #f6f1e2;
+  color: #5B4A42;
+}
+h1, h2 {
+  color: #4A3B35;
+  font-weight: 600;
+}
+
+body {
+  background-color: #f6f1e2; 
+  color: #5B4A42;           
+  line-height: 1.8;
+}
+
+.home-wrapper {
+  max-width: 900px;
+  margin: 40px auto 60px;
+  padding: 0 16px;
+}
+
+.home-copy {
+  font-size: 17px;
+  margin-bottom: 24px;
+}
+
+.home-copy p {
+  margin-bottom: 0.4rem;
+}
+
+.home-actions .btn {
+  min-width: 140px;
+}
+
+.home-logo {
+  width: 400px; 
+  margin: 20px auto;
+  display: block;
+}
+
+.home-sub-visual img {
+  max-width: 350px;
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+.header-logo img {
+  height: 150px;
+  width: auto;
+}
+
+@media (max-width: 600px) {
+  .header-logo img {
+    height: 40px;
+  }
+
+  .nav-link {
+    font-size: 14px;
+  }
+}
+.header-nav{
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-nav .nav-link {
+  color: #D26A54 !important; 
+  font-weight: 500;
+}
+
+.header-nav .nav-link:hover {
+  color: #A7483A !important; 
+}
+
+.header-nav .btn {
+  background-color: transparent !important;
+  border: none !important;
+  color: #D26A54 !important;
+  font-weight: 600;
+  padding: 0 !important;
+}
+
+.header-nav .btn:hover {
+  color: #A7483A !important;
+}
+
+.password-field small {
+  display: block;
+  font-size: 13px;
+  color: #666;
+  margin-top: 4px;
+}
+
+form {
+  max-width: 450px;
+  margin-left: 50px;
+}
+
+/* "＊変更しない場合は〜" の小さい文字調整 */
+.field small {
+  margin-top: -5px;  
+  display: block;
+  margin-bottom: 8px;
+}
+
+body {
+  font-family: 'Zen Maru Gothic', serif;
+}
+
+.return-btn {
+  display: inline-block; /* 横幅を内容に合わせる */
+  width: auto;           /* 幅固定解除 */
+  padding: 6px 18px;     /* ボタンサイズ調整 */
+  text-align: center;
+  margin-top: 10px;
+  color: #a8683a !important;
+  border: 1px solid #a8683a !important;
+  border-radius: 6px; /* 他と合う丸み */
+  font-size: 14px;
+}
+
+.return-btn:hover {
+  background-color: #a8683a;
+  color: white !important;
+  transition: 0.3s;
+}
+/* ------------------------------
+🍰 ボタン共通スタイル（GrowCake仕様）
+------------------------------ */
+.btn, input[type="submit"], button {
+  background-color: #E5B6C6;
+  border: 2px solid #E5B6C6;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: all .25s ease;
+  display: inline-block;
+}
+
+/* ホバー */
+.btn:hover, input[type="submit"]:hover, button:hover {
+  transform: translateY(-3px);
+  background-color: #D47A5B;
+  border-color: #D47A5B;
+  box-shadow: 0px 5px 10px rgba(0,0,0,0.15);
+}
+.btn-outline {
+  background: transparent;
+  border: 2px solid #E5B6C6;
+  color: #E5B6C6;
+}
+
+.btn-outline:hover {
+  background-color: #E5B6C6;
+  color: #fff;
+}
+/* 運動ログタイトル調整 */
+.exercise-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+.exercise-wrapper {
+  margin-top: 40px;
+  text-align: center; 
+}
+
+.exercise-wrapper p {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+/* ---- ページ内リンク統一 ---- */
+a {
+  color: #D26A54;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #A7483A;
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Deviseフォーム位置調整 */
+.form-wrapper {
+  width: 380px;
+  margin: 30px auto;  /* 画面中央へ */
+  display: block;
+}
+
+/* 内部要素中央寄せ */
+.form-wrapper h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-wrapper .actions {
+  text-align: center;
+}
+
+/* フォーム幅固定（ブラウザに左右されないように） */
+.form-wrapper input {
+  width: 100% !important;
+}
+/* 新規登録ボタンの位置　*/
+
+.actions {
+  margin-top: 25px;  
+}
+
+.form-container {
+  width: 300px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.welcome-text {
+  font-family: 'YuMincho', serif;
+  font-size: 15px;
+  letter-spacing: 0.5px;
+  color: #b37b85;
+  font-weight: 500;
+  margin-right: 100px; 
+}

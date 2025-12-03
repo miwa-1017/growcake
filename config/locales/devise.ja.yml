@@ -1,0 +1,60 @@
+ja:
+  devise:
+    confirmations:
+      confirmed: "メールアドレスが確認されました。"
+      send_instructions: "確認メールを送信しました。"
+      send_paranoid_instructions: "登録されている場合、確認手順をメールで送信しました。"
+
+    failure:
+      already_authenticated: "すでにログインしています。"
+      inactive: "アカウントが有効化されていません。"
+      invalid: "メールアドレスまたはパスワードが正しくありません。"
+      locked: "アカウントがロックされています。"
+      not_found_in_database: "メールアドレスまたはパスワードが正しくありません。"
+      timeout: "セッションの有効期限が切れました。再度ログインしてください。"
+      unauthenticated: "ログインしてください。"
+      unconfirmed: "メールアドレスの確認が必要です。"
+
+    mailer:
+      confirmation_instructions:
+        subject: "アカウントの確認"
+      reset_password_instructions:
+        subject: "パスワード再設定の手順"
+      unlock_instructions:
+        subject: "アカウントロック解除手順"
+
+    passwords:
+      send_instructions: "パスワード再設定手順をメールで送信しました。"
+      updated: "パスワードが更新されました。"
+      updated_not_active: "パスワードが更新されましたが、アカウントはまだ確認されていません。"
+
+    registrations:
+      signed_up: "アカウント登録が完了しました"
+      updated: "アカウント情報を更新しました。"
+      destroyed: "アカウントを削除しました…"
+
+    sessions:
+      signed_in: "ログインしました。"
+      signed_out: "ログアウトしました。"
+      new:
+        submit: "ログイン"
+
+    unlocks:
+      send_instructions: "ロック解除手順をメールで送信しました。"
+      unlocked: "アカウントのロックが解除されました。"
+
+    shared:
+      links:
+        sign_in: "ログイン"
+        sign_up: "新規登録"
+        forgot_your_password: "パスワードを忘れましたか？"
+        didnt_receive_confirmation_instructions: "確認メールが届いていませんか？"
+        didnt_receive_unlock_instructions: "ロック解除メールが届いていませんか？"
+
+  errors:
+    messages:
+      expired: "期限が切れています。"
+      not_found: "見つかりません。"
+      already_confirmed: "すでに確認済みです。"
+      confirmation_period_expired: "確認期間がすでに終了しています。新しいメールをリクエストしてください。"
+      too_short: "パスワードは%{count}文字以上で入力してください"
