@@ -1,0 +1,28 @@
+<div class="growth-wrapper text-center">
+  <h1>ケーキ成長ページ</h1>
+
+  <p>現在の総成長ポイント：<%= @total_points %> pt</p>
+
+  <% if @user.cake_type != "unset" %>
+    <% cake_type = @user.cake_type %>
+    <% stage_number = @stage + 1 %>
+
+    <% prefix =
+      case cake_type
+      when "tarte"     then "tart"   # ← フォルダのファイル名に合わせる
+      when "shortcake" then "cake"
+      else cake_type
+      end
+    %>
+
+    <div class="cake-display">
+      <div class="cake-frame-background"></div>  <!-- 背景エリア -->
+        <%= image_tag "cakes/cake_frame.png", class: "cake-frame" %>
+        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', stage_number)}.png", class: "cake-image" %>
+    </div>
+
+    <p>成長段階: <%= @stage %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %></p>
+  <% else %>
+    <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
+  <% end %>
+</div>

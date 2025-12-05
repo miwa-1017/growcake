@@ -12,10 +12,15 @@ Rails.application.routes.draw do
   end
 
   authenticate :user do
-    get '/mypage', to: 'users#show', as: 'mypage'
+    get '/mypage', to: 'mypage#show', as: 'mypage'
+    get '/mypage/edit', to: 'mypage#edit', as: :edit_mypage
+    patch '/mypage', to: 'mypage#update'
   end
 
   resources :users, only: [:show]  
   resources :posts
   resources :exercise_logs, only: [:index, :new, :create]
+  resources :growth_logs, only: [ :create]
+  get '/growth', to: 'growth#show', as: :growth
+  resources :growth,only: :show
 end
