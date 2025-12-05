@@ -1,0 +1,10 @@
+<h2>マイページ編集</h2>
+
+<%= form_with model: current_user, url: mypage_path, method: :patch do |f| %>
+  <div>
+    <%= f.label :name, "名前" %>
+    <%= f.text_field :name %>
+  </div>
+
+  <%= f.submit "更新する", class: "btn mt-3" %>
+<% end %>

@@ -15,6 +15,9 @@ class ExerciseLogsController < ApplicationController
     if @exercise_log.save
       points = @exercise_log.calculate_points
       current_user.increment!(:total_points, points)
+      #成長ポイント履歴を保存
+      current_user.growth_logs.create(growth_point: points)
+
       redirect_to exercise_logs_path, notice: "運動ログ追加！ +#{points}pt 🏋️‍♀️✨"
     else
       render :new

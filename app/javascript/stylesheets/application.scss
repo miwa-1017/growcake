@@ -166,8 +166,7 @@ body {
   margin-bottom: 15px;
 }
 .exercise-wrapper {
-  margin-top: 40px;
-  text-align: center; 
+  margin-top: 40px; 
 }
 
 .exercise-wrapper p {
@@ -232,4 +231,62 @@ a:hover {
   color: #b37b85;
   font-weight: 500;
   margin-right: 100px; 
+}
+/*ケーキ選択ブロック全体*/
+.cake-select {
+  text-align: center;
+  margin: 10px 0;
+}
+/*ラジオボタンの並び　*/
+.cake-select form {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+/*リンクボタン位置調整*/
+.mypage-edit-link {
+  margin-top: 0; 
+  text-align: center;
+}
+
+.mypage-edit-link .btn {
+  margin-top: 0 !important; 
+}
+
+.cake-display {
+  position: relative;
+  width: 350px; /* 枠に合わせて必要なら調整 */
+  margin: 0 auto;
+}
+
+.cake-frame {
+  width: 140%;   
+  position: absolute;
+  top: -1%;
+  left: -20%;
+  z-index: 1;
+}
+
+.cake-image {
+  width: 100%;
+  top: -1%;
+  position: relative;
+  z-index: 2;
+}
+
+.cake-frame-background {
+  position: absolute;
+  top: 10%;
+  left: -5%;
+  width: 110%;
+  height: 80%;
+  background-color: #D5EEF2; /* ←好きな色に変更 */
+  border-radius: 20px; /* ←角丸にするか自由 */
+  z-index: 0;
 }
