@@ -6,23 +6,34 @@
   <% if @user.cake_type != "unset" %>
     <% cake_type = @user.cake_type %>
     <% stage_number = @stage + 1 %>
+      <% prefix =
+        case @user.cake_type
+        when "tarte" then "tart"
+        when "shortcake" then "cake"
+        else "cake"
+        end %>
 
-    <% prefix =
-      case cake_type
-      when "tarte"     then "tart"   # ← フォルダのファイル名に合わせる
-      when "shortcake" then "cake"
-      else cake_type
-      end
-    %>
-
-    <div class="cake-display">
-      <div class="cake-frame-background"></div>  <!-- 背景エリア -->
+      <div class="cake-display">
+        <div class="cake-frame-background <%= @user.cake_type %>"></div>
         <%= image_tag "cakes/cake_frame.png", class: "cake-frame" %>
-        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', stage_number)}.png", class: "cake-image" %>
-    </div>
+        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', @stage + 1)}.png", class: "cake-image" %>
+      </div>
 
-    <p>成長段階: <%= @stage %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %></p>
-  <% else %>
-    <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
-  <% end %>
+    <p>成長段階: <%= @stage + 1 %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %></p>
+      <% else %>
+        <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
+      <% end %>
+
+      <% final_stage = User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>
+
+      <% if @stage == final_stage %>
+        🎉✨ おめでとう！ ✨🍰<br>
+        ここまで続けてきたあなたの努力、とっても素敵だよ。<br>
+        今日の積み重ねが、未来のあなたを作る。<br>
+        これからも、焦らず自分のペースでね。<br>
+      <% end %>
+      <div id="confetti"
+        data-stage="<%= @stage %>"
+        data-max="<%= User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>">
+      </div>
 </div>

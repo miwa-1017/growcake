@@ -6,7 +6,7 @@
     <h3>ケーキタイプ設定</h3>
 
   <% if current_user.cake_type.blank? %>
-    <%= form_with model: current_user, url: mypage_path, method: :patch, local: true do |f| %>
+    <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
       <div class="cake-select-box">
         <%= f.radio_button :cake_type, :tarte %>
         <%= f.label :cake_type_tarte, "タルト" %>
@@ -19,8 +19,8 @@
     <% end %>
 
   <% else %>
-    <p>あなたのケーキタイプ：<strong><%= current_user.cake_type %></strong></p>
-    <%= link_to "変更する", edit_mypage_path, class: "btn mt-3" %>
+    <p>あなたのケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
+    <%= link_to "変更する", edit_cake_type_path, class: "btn mt-3" %>
   <% end %>
 
   <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
@@ -29,7 +29,7 @@
     <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn" %>
     <%= link_to "筋トレの記録を見る", exercise_logs_path, class: "btn btn-outline mt-3" %>
     <% if current_user.growth_logs.exists? %>
-      <%= link_to "ケーキの成長を見る", growth_log_path(current_user.growth_logs.last), class: "btn mt-3" %>
+      <%= link_to "ケーキの成長を見る", growth_path, class: "btn mt-3" %>
     <% else %>
       <%= link_to "ケーキを育て始める", growth_path, class: "btn mt-3" %>
     <% end %>

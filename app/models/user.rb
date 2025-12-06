@@ -12,8 +12,8 @@ class User < ApplicationRecord
   enum cake_type: { unset: 0, tarte: 1, shortcake: 2 }
 
    GROWTH_STAGES = {
-    tarte:     [0, 10, 20, 30, 40, 50, 60, 70, 80],    #9段階
-    shortcake: [0, 10, 20, 30, 40, 50, 60, 70, 80, 100] #10段階
+    tarte:     [0, 10, 20, 30, 40, 50, 60, 70, 80],    
+    shortcake: [0, 10, 20, 30, 40, 50, 60, 70, 80] 
   }
 
   # 現在の合計ポイント
@@ -23,11 +23,15 @@ class User < ApplicationRecord
 
   # 現在の成長段階
   def current_stage
-    return 0 if cake_type == "unset" # 未選択
+    return 0 if cake_type == "unset" # 未選択時
 
-    thresholds = GROWTH_STAGES[cake_type&.to_sym] || []
+    stages = GROWTH_STAGES[cake_type.to_sym]
 
-    thresholds.count { |t| total_growth_point >= t } - 1
+    stages.each_with_index do |threshold, index|
+      return index if total_growth_point < threshold
+    end
+
+    stages.size - 1 # 最終ステージ
   end
 
   def growth_finished?

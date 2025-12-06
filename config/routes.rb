@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'cake_types/edit'
+  get 'cake_types/update'
   devise_for :users, controllers: {
   registrations: 'users/registrations'
 }
@@ -23,4 +25,5 @@ Rails.application.routes.draw do
   resources :growth_logs, only: [ :create]
   get '/growth', to: 'growth#show', as: :growth
   resources :growth,only: :show
+  resource :cake_type, only:[:edit, :update]
 end
