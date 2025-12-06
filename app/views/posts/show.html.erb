@@ -1,5 +1,33 @@
-<h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<div class="post-show-wrapper">
 
-<%= link_to "編集", edit_post_path(@post) %> |
-<%= link_to "一覧に戻る", posts_path %>
+  <% if @post.exercise.present? %>
+    <p class="exercise-text">
+      🏃‍♀️ 今日の運動：<strong><%= @post.exercise %></strong>
+    </p>
+  <% end %>
+  
+  <p class="post-meta">
+    👤 投稿者：<%= @post.user.name %><br>
+    📅 投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
+  </p>
+
+
+  <p class="post-body">
+    <%= simple_format(@post.body) %>
+  </p>
+
+    <% if @post.image.attached? %>
+      <div class="post-image">
+        <%= image_tag @post.image, width: "300px" %>
+      </div>
+    <% end %>
+
+
+  <% if @post.user == current_user %>
+    <%= link_to "編集 ", edit_post_path(@post), class: "btn" %>
+    <%= link_to "削除 ", @post, method: :delete, data: { confirm: "削除してもいい？" }, class: "btn danger" %>
+  <% end %>
+  
+  <%= link_to "一覧に戻る", posts_path, class: "btn" %>
+
+</div>

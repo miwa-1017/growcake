@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'cake_types/edit'
-  get 'cake_types/update'
+  #get 'cake_types/edit'
+  #get 'cake_types/update'
   devise_for :users, controllers: {
   registrations: 'users/registrations'
 }

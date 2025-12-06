@@ -1,16 +1,27 @@
-<h1>投稿一覧</h1>
+<div class="cake-edit-wrapper">
 
-<%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
+  <h2>投稿フォーム</h2>
 
-<ul>
-  <% @posts.each do |post| %>
-    <li>
-      <%= link_to post.title, post %>
-      <span style="color:#aaa; font-size: 12px;">
-        （<%= post.created_at.strftime("%Y/%m/%d") %>）
-      </span>
-    </li>
+  <%= form_with model: @post, local: true do |f| %>
+
+    <div class="field">
+      <%= f.label :exercise, "今日の運動" %><br>
+      <%= f.text_field :exercise, placeholder: "例：スクワット20回/ウォーキング30分" %>
+    </div>
+
+    <div class="field">
+      <%= f.label :body, "コメント" %><br>
+      <%= f.text_area :body, placeholder: "感想や気づきを書いてみよう🐰✏️" %>
+    </div>
+
+    <div class="hidden">
+      <%= f.label :image, "ケーキ画像 📷" %><br>
+      <%= f.file_field :image %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit "投稿する", class: "btn" %>
+    </div>
+
   <% end %>
-</ul>
-
-<%= link_to "戻る", posts_path %>
+</div>
