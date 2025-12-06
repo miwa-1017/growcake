@@ -24,6 +24,8 @@
         <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
       <% end %>
 
+      <%= link_to "今日の記録を投稿する📸", new_post_path, class: "btn" %>
+
       <% final_stage = User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>
 
       <% if @stage == final_stage %>
@@ -32,6 +34,7 @@
         今日の積み重ねが、未来のあなたを作る。<br>
         これからも、焦らず自分のペースでね。<br>
       <% end %>
+      
       <div id="confetti"
         data-stage="<%= @stage %>"
         data-max="<%= User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>">
