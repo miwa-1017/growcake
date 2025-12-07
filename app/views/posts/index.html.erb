@@ -1,52 +1,72 @@
 <div class="posts-wrapper">
-  <h2>みんなの投稿</h2>
 
-  <div class="posts-container">
-    <% @posts.each do |post| %>
-      <% stage = post.user.current_stage %>
-      <div class="post-card stage-<%= stage %>">
+  <%= form_with url: search_posts_path, method: :get, local: true do %>
 
-        <% if post.image.attached? %>
-          <%= image_tag post.user.cake_image_for_display, class: "post-card-img" %>
-        <% else %>
-          <%= image_tag "cakes/cake_stage_01.png", class: "post-card-img default-img" %>
-        <% end %>
+  <%= select_tag :exercise,
+        options_for_select([["運動(指定なし)", ""]] + exercise_options.to_a),
+        class: "form-select" %>
 
-        <div class="post-card-content">
-          <% logs = post.user.exercise_logs.where(date: Date.today) %>
-            <p class="post-exercise">
-              ✨
-              <% if logs.present? %>
-                <% logs.each do |log| %>
-                  <%= t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分)<br>
+  <%= select_tag :cake_type,
+        options_for_select([["ケーキタイプ(指定なし)", ""], ["ショートケーキ", "shortcake"], ["タルト", "tarte"]]),
+        class: "form-select" %>
+
+  <%= select_tag :growth_status,
+        options_for_select([["成長ステージ(指定なし)", ""], ["最終ステージだけ", "finished"]]),
+        class: "form-select" %>
+
+    <!-- 検索ボタン -->
+    <%= submit_tag "検索", class: "btn" %>
+
+  <% end %>
+
+    <h2>みんなの投稿</h2>
+
+    <div class="posts-container">
+      <% @posts.each do |post| %>
+        <% stage = post.user.current_stage %>
+        <div class="post-card stage-<%= stage %>">
+
+          <% if post.image.attached? %>
+            <%= image_tag post.user.cake_image_for_display, class: "post-card-img" %>
+          <% else %>
+            <%= image_tag "cakes/cake_stage_01.png", class: "post-card-img default-img" %>
+          <% end %>
+
+          <div class="post-card-content">
+            <% logs = post.user.exercise_logs.where(date: Date.today) %>
+              <p class="post-exercise">
+                ✨
+                <% if logs.present? %>
+                  <% logs.each do |log| %>
+                    <%= t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分)<br>
+                  <% end %>
+                <% else %>
+                  運動なし
                 <% end %>
-              <% else %>
-                運動なし
-              <% end %>
+              </p>
+            <p class="post-body"><%= truncate(post.body, length: 30) %></p>
+            <p class="post-date">📅 <%= post.created_at.strftime("%Y/%m/%d") %></p>
+          </div>
+
+          <% if post.comments.any? %>
+            <p class="comment-count">
+              💬 <%= post.comments.count %>件  
+              （最新：「<%= truncate(post.comments.last.content, length: 10) %>」）
             </p>
-          <p class="post-body"><%= truncate(post.body, length: 30) %></p>
-          <p class="post-date">📅 <%= post.created_at.strftime("%Y/%m/%d") %></p>
-        </div>
-
-        <% if post.comments.any? %>
-          <p class="comment-count">
-            💬 <%= post.comments.count %>件  
-            （最新：「<%= truncate(post.comments.last.content, length: 10) %>」）
-          </p>
-       <% else %>
-          <p class="comment-count">
-            💬 まだコメントはありません
-          </p>
-       <% end %>
-
-        <div class="post-card-actions">
-          <%= link_to "詳しく見る", post_path(post), class: "card-btn" %>
-        </div>
-
-        <% if post.user == current_user %>
-          <%= link_to "編集", edit_post_path(post), class: "card-btn" %>
+        <% else %>
+            <p class="comment-count">
+              💬 まだコメントはありません
+            </p>
         <% end %>
-      </div>
-    <% end %>
-  </div>
+
+          <div class="post-card-actions">
+            <%= link_to "詳しく見る", post_path(post), class: "card-btn" %>
+          </div>
+
+          <% if post.user == current_user %>
+            <%= link_to "編集", edit_post_path(post), class: "card-btn" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
 </div>
