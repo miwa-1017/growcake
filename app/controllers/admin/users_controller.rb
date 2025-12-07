@@ -1,10 +1,6 @@
-class UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
-
-  def show
-    @user = current_user
-  end
-
+  before_action :admin_only
 
   def index
     @users = User.all
@@ -13,7 +9,7 @@ class UsersController < ApplicationController
   def destroy
     @user = User.find(params[:id])
     @user.destroy
-    redirect_to users_path, notice: "ユーザーを削除しました。"
+    redirect_to admin_users_path, notice: "ユーザーを削除しました。"
   end
 
   private

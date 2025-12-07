@@ -12,6 +12,8 @@ class ExerciseLogsController < ApplicationController
   def create
     @exercise_log = current_user.exercise_logs.new(exercise_log_params)
 
+    @exercise_log.date = Date.today
+
     if @exercise_log.save
       points = @exercise_log.calculate_points
       current_user.increment!(:total_points, points)

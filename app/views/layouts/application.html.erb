@@ -51,6 +51,12 @@
               <%= link_to "新規登録", new_user_registration_path, class: "nav-link me-3" %>
             <% end %>
 
+            <% if user_signed_in? %>
+              <% if current_user.admin? %>
+                <%= link_to "ユーザー管理", admin_users_path, class: "nav-link me-3" %>
+              <% end %>
+            <% end %>
+
           </nav>
        </header>
     <%= yield %>

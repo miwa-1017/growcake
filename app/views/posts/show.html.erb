@@ -18,7 +18,7 @@
 
     <% if @post.image.attached? %>
       <div class="post-image">
-        <%= image_tag @post.image, width: "300px" %>
+        <%= image_tag @post.user.cake_image_for_display, width: "300px" %>
       </div>
     <% end %>
 
@@ -50,6 +50,9 @@
         <strong><%= comment.user.name %>：</strong>
         <%= comment.content %>
       </p>
+      <% if current_user == comment.user || current_user&.admin? %>
+        <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+      <% end %>
     <% end %>
   
   <%= link_to "一覧に戻る", posts_path, class: "btn" %>

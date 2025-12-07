@@ -2,6 +2,7 @@ class PostsController < ApplicationController
   before_action :authenticate_user!,except: [:index, :show]
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
+  before_action :set_exercise_log, only: [:new, :edit, :update]
 
  
   def index
@@ -13,7 +14,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
-    @today_log = current_user.exercise_logs.find_by(date: Date.today)
+    @exercise_log = current_user.exercise_logs.find_by(date: Date.today)
   end
 
   def create
@@ -73,6 +74,10 @@ class PostsController < ApplicationController
     unless @post.user == current_user
       redirect_to posts_path, alert: "投稿者しか編集できません"
     end
+  end
+
+  def set_exercise_log
+    @exercise_logs = current_user.exercise_logs.where(date: Date.today)
   end
 
 end
