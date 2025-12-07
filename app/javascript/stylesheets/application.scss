@@ -345,11 +345,14 @@ ul {
 }
 
 .posts-container {
-  display: grid;
+  display: flex;
+  flex-wrap: wrap;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 3px;
   margin-top: 20px;
   padding: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .post-card {
@@ -509,4 +512,8 @@ ul {
 
 .guest-actions .btn {
   margin: 5px auto;
+}
+
+.search-box {
+  text-align: left;
 }

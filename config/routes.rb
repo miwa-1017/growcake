@@ -21,6 +21,9 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :index, :destroy]  
   resources :posts do
+    collection do
+      get :search
+    end
     resources :comments, only: :create
   end
   resources :exercise_logs, only: [:index, :new, :create]

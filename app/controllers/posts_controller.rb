@@ -59,6 +59,26 @@ class PostsController < ApplicationController
     redirect_to posts_path, notice: "削除しました🗑"
   end
 
+  def search
+    @posts = Post.all
+
+    if params[:exercise].present?
+      @posts = @posts.joins(user: :exercise_logs)
+                    .where(exercise_logs: { category: params[:exercise] })
+                    .distinct  
+    end
+
+    if params[:cake_type].present?
+      @posts = @posts.joins(:user).where(users: { cake_type: params[:cake_type] })
+    end
+
+    if params[:growth_status] == "finished"
+      @posts = @posts.select { |post| post.user.growth_finished? }
+    end
+
+    render :index
+  end
+
   private
 
 
