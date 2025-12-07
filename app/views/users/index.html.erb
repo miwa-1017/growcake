@@ -1,0 +1,30 @@
+<div class="admin-wrapper">
+  <h2>ユーザー一覧</h2>
+
+  <table class="users-table">
+    <thead>
+      <tr>
+        <th>名前</th>
+        <th>メール</th>
+        <th>操作</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td>
+            <% unless user.email == "guest@example.com" %>
+              <%= link_to "削除", user_path(user), 
+                    method: :delete,
+                    data: { confirm: "本当に削除しますか？" }, 
+                    class: "btn-delete" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -19,7 +19,7 @@ Rails.application.routes.draw do
     patch '/mypage', to: 'mypage#update'
   end
 
-  resources :users, only: [:show]  
+  resources :users, only: [:show, :index, :destroy]  
   resources :posts
   resources :exercise_logs, only: [:index, :new, :create]
   resources :growth_logs, only: [ :create]
