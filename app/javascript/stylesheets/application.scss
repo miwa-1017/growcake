@@ -447,3 +447,66 @@ ul {
   margin-bottom: 15px;
   color: #333;
 }
+
+.admin-wrapper {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.users-table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background: #fffdf9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+}
+
+.users-table th {
+  background: #f7e7e9;
+  padding: 10px;
+  font-weight: bold;
+  color: #6c4c4c;
+}
+
+.users-table td {
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+}
+
+.users-table tr:hover {
+  background: #fff4f6;
+}
+
+.btn-delete {
+  background: #ff8b8b;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.btn-delete:hover {
+  background: #ff6b6b;
+}
+
+.exercise-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.exercise-item {
+  background-color: #f9e6e9; 
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 1px solid #e5b6c8;
+}
+
+.guest-actions .btn {
+  margin: 5px auto;
+}

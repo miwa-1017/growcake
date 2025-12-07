@@ -2,13 +2,18 @@
 
   <h2>投稿フォーム</h2>
 
-  <% if @today_log.present? %>
-    <div class="auto-log">
-    <p>今日の運動 ： <%= I18n.t("enums.exercise_log_category.#{@today_log.category}") %> (<%= @today_log.minutes %> 分)</p>
-    </div>
-  <% else %>
-    <p class="warn">まだ運動ログが入力されていません</p>
-  <% end %>
+  <% if @exercise_logs.present? %>
+    <p>今日の運動：</p>
+      <div class="exercise-list">
+        <% @exercise_logs.each do |log| %>
+          <div class="exercise-item">
+            <%= t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分）
+          </div>
+        <% end %>
+      </div>
+ <% else %>
+    <p>まだ運動ログが入力されていません</p>
+ <% end %>
 
   <div class="form-area">
 

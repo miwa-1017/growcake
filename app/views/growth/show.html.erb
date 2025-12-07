@@ -29,10 +29,12 @@
       <% final_stage = User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>
 
       <% if @stage == final_stage %>
+        <div class="congrats-message">
         🎉✨ おめでとう！ ✨🍰<br>
-        ここまで続けてきたあなたの努力、とっても素敵だよ。<br>
-        今日の積み重ねが、未来のあなたを作る。<br>
-        これからも、焦らず自分のペースでね。<br>
+        <p>ここまで続けてきたあなたの努力、とっても素敵だよ。</p>
+        <p>今日の積み重ねが、未来のあなたを作る。</p>
+        <p>これからも、焦らず自分のペースでね。</p>
+        </div>
       <% end %>
       
       <div id="confetti"

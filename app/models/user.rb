@@ -40,6 +40,25 @@ class User < ApplicationRecord
     current_stage == GROWTH_STAGES[cake_type&.to_sym].length - 1
   end
 
+  def cake_image_for_display
+    # ケーキタイプ未選択のときは枠だけにする
+    return "cakes/cake_frame.png" if cake_type == "unset"
+
+    # shortcake → cake_, tarte → tart_ に対応
+    prefix =
+      case cake_type
+      when "shortcake" then "cake"
+      when "tarte"     then "tart"
+      else "cake"
+      end
+
+    # current_stage は 0〜8 なので、画像名 01〜09 に合わせる
+    stage_no  = current_stage + 1          # 1〜9
+    stage_str = format("%02d", stage_no)   # "01"〜"09"
+
+    "cakes/#{prefix}_stage_#{stage_str}.png"
+  end
+
   def guest?
     email == 'guest@example.com'
   end
@@ -49,6 +68,10 @@ class User < ApplicationRecord
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲストユーザー"
     end
+  end
+
+  def admin?
+    self.admin == true
   end
 
 end

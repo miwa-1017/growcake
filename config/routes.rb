@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  #マイページ(一般ユーザー用)
   #get 'cake_types/edit'
   #get 'cake_types/update'
   devise_for :users, controllers: {
@@ -27,4 +28,10 @@ Rails.application.routes.draw do
   get '/growth', to: 'growth#show', as: :growth
   resources :growth,only: :show
   resource :cake_type, only:[:edit, :update]
+
+  #====管理者用==========
+    namespace :admin do
+    resources :users, only: [:index, :destroy]
+    resources :comments, only: [:destroy]
+  end
 end
