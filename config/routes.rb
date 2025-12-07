@@ -4,9 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
   registrations: 'users/registrations'
 }
-
-  get 'homes/top'
-  root to: 'homes#top'
+  root 'homes#top'
+  get 'homes/top', to: 'homes#top'
   get 'about' => 'homes#about'
 
   devise_scope :user do
@@ -20,7 +19,9 @@ Rails.application.routes.draw do
   end
 
   resources :users, only: [:show, :index, :destroy]  
-  resources :posts
+  resources :posts do
+    resources :comments, only: :create
+  end
   resources :exercise_logs, only: [:index, :new, :create]
   resources :growth_logs, only: [ :create]
   get '/growth', to: 'growth#show', as: :growth
