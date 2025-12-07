@@ -27,6 +27,30 @@
     <%= link_to "編集 ", edit_post_path(@post), class: "btn" %>
     <%= link_to "削除 ", @post, method: :delete, data: { confirm: "削除してもいい？" }, class: "btn danger" %>
   <% end %>
+
+    <hr>
+
+  <h3>コメントを書く</h3>
+
+    <% if user_signed_in? && current_user.email != "guest@example.com" %>
+      <%= form_with model: [@post, Comment.new], local: true do |f| %>
+        <%= f.text_area :content, placeholder: "コメントを書く...", rows: 2 %><br>
+        <%= f.submit "送信" %>
+  <% end %>
+    <% else %>
+        <p>※コメントするにはログインが必要です。</p>
+        <%= link_to "ログインする", new_user_session_path, class: "btn" %>
+    <% end %>
+    <hr>
+
+   <h3>コメント一覧</h3> 
+
+    <% @post.comments.each do |comment| %>
+      <p>
+        <strong><%= comment.user.name %>：</strong>
+        <%= comment.content %>
+      </p>
+    <% end %>
   
   <%= link_to "一覧に戻る", posts_path, class: "btn" %>
 

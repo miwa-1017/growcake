@@ -13,6 +13,7 @@ class PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @today_log = current_user.exercise_logs.find_by(date: Date.today)
   end
 
   def create
@@ -61,7 +62,7 @@ class PostsController < ApplicationController
 
 
   def post_params
-    params.require(:post).permit(:title, :body)
+    params.require(:post).permit(:exercise, :body)
   end
 
   def set_post

@@ -6,7 +6,7 @@
 
       <div class="form-group">
         <%= f.label :category, "運動の種類" %><br>
-        <%= f.select :category, ExerciseLog.categories.keys.map { |k| [I18n.t("enums.exercise_log.category.#{k}"), k] } %>
+        <%= f.select :category, ExerciseLog.categories.keys.map { |k| [I18n.t("enums.exercise_log_category.#{k}"), k] } %>
       </div>
 
       <div class="form-group">

@@ -1,10 +1,15 @@
 ja:
   enums:
-    exercise_log:
-      category:
-        strength: "筋トレ"
-        cardio: "有酸素運動"
-        stretch: "ストレッチ"
+    exercise_log_category:
+      cardio: "有酸素"
+      running: "ランニング"
+      strength: "筋トレ"
+      stretch: "ストレッチ"
+      walking: "ウォーキング"
+      yoga: "ヨガ"
+      dance: "ダンス"
+      pilates: "ピラティス"
+      ems: "EMS"
 
   activerecord:
     attributes:
