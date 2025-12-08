@@ -1,0 +1,41 @@
+<div class="admin-user-show">
+  <h2><%= @user.name %> さんの詳細</h2>
+
+  <div class="user-info">
+    <p><span>名前：</span> <%= @user.name %></p>
+    <p><span>メール：</span> <%= @user.email %></p>
+    <p><span>登録日：</span> <%= @user.created_at.strftime("%Y/%m/%d") %></p>
+    <p>
+      <span>アカウント状態：</span>
+      
+      <% if @user.is_banned %>
+        <span class="status-banned">BAN中</span>
+      <% elsif @user.is_deleted %>
+        <span class="status-deleted">退会済み</span>
+      <% else %>
+        <span class="status-active">利用中</span>
+      <% end %>
+    </p>
+  </div>
+
+    <div class="actions">
+
+      <% unless @user.email == "guest@example.com" %>
+
+        <% if @user.is_banned %>
+          <%= link_to "BAN解除", unban_admin_user_path(@user), method: :patch, class: "btn-ban" %>
+
+        <% elsif @user.is_deleted %>
+          <span class="disabled-btn">退会済み</span>
+
+        <% else %>
+          <%= link_to "退会させる", withdraw_admin_user_path(@user), method: :patch, class: "btn-delete", data: { confirm: "本当に退会させますか？" } %>
+          <%= link_to "BANする", ban_admin_user_path(@user), method: :patch, class: "btn-ban", data: { confirm: "このユーザーをBANしますか？（ログイン不可）" } %>
+        <% end %>
+
+      <% end %>
+
+    <%= link_to "戻る", admin_users_path, class: "btn-back" %>
+
+  </div>
+</div>

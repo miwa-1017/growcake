@@ -6,10 +6,32 @@ class Admin::UsersController < ApplicationController
     @users = User.all
   end
 
+  def show
+    @user = User.find(params[:id])
+  end
+
+  def withdraw
+    @user = User.find(params[:id])
+    @user.update(is_deleted: true)
+    redirect_to admin_user_path(@user), notice: "退会処理をしました。"
+  end
+
+  def ban
+    @user = User.find(params[:id])
+    @user.update(is_banned: true)
+    redirect_to admin_user_path(@user), alert: "BANしました。（ログイン不可）"
+  end
+
+  def unban
+    @user = User.find(params[:id])
+    @user.update(is_banned: false)
+    redirect_to admin_user_path(@user), notice: "BANを解除しました。"
+  end
+
   def destroy
     @user = User.find(params[:id])
-    @user.destroy
-    redirect_to admin_users_path, notice: "ユーザーを削除しました。"
+    @user.update(is_deleted: true)
+    redirect_to admin_users_path, notice: "ユーザーを退会処理しました。"
   end
 
   private
