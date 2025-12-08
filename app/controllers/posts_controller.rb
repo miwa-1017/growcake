@@ -21,23 +21,39 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
 
-    # 画像自動添付処理
+    # ▼▼既存のケーキ画像自動セット▼▼
     current_stage = current_user.total_points
     stage_index = User::GROWTH_STAGES[current_user.cake_type.to_sym].select { |s| s <= current_stage }.count
-
-    # cake または tart 判定
     prefix = current_user.cake_type == "shortcake" ? "cake" : "tart"
-
-    # 01,02...にゼロ埋め
-    formatted_index = format('%02d', stage_index)
-
+    formatted_index = format("%02d", stage_index)
     cake_path = Rails.root.join("app/assets/images/cakes/#{prefix}_stage_#{formatted_index}.png")
-
     @post.image.attach(io: File.open(cake_path), filename: "#{prefix}_stage_#{formatted_index}.png")
 
-
     if @post.save
-      redirect_to @post, notice: "投稿しました🎉"
+      # -------------------------
+      # 成長履歴自動保存ロジック
+      # -------------------------
+
+            # ▼ 成長履歴保存 ▼
+      before_stage = current_user.current_stage
+
+      # 👉 point の更新は growth_logs に記録
+      current_user.growth_logs.create(growth_point: 1)
+
+      after_stage = current_user.current_stage
+
+      # ✔ ステージが変わったら成長履歴作成🎉
+      if after_stage != before_stage
+        GrowthRecord.create(
+          user: current_user,
+          post: @post,
+          stage: after_stage,
+          date: Date.today,
+          comment: "🎉 ステージアップ！"
+        )
+      end
+
+      redirect_to @post, notice: "投稿しました🍰"
     else
       render :new
     end

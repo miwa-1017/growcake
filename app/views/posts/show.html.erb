@@ -7,7 +7,7 @@
   <% end %>
   
   <p class="post-meta">
-    👤 投稿者：<%= @post.user.is_deleted? ? "退会済みユーザー" : user.name %><br>
+    👤 投稿者：<%= @post.user.is_deleted? ? "退会済みユーザー" : @post.user.name %><br>
     📅 投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
   </p>
 

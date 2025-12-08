@@ -5,6 +5,7 @@ class User < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :growth_logs, dependent: :destroy
   has_many :comments
+  has_many :growth_records
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable

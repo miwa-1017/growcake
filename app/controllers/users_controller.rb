@@ -16,6 +16,14 @@ class UsersController < ApplicationController
     redirect_to users_path, notice: "ユーザーを削除しました。"
   end
 
+  def withdraw
+    @user = current_user
+    @user.update(is_deleted: true)
+
+    reset_session  # ログアウトさせる
+    redirect_to root_path, notice: "退会処理が完了しました。またいつでも戻ってきてね "
+  end
+
   private
 
   def admin_only

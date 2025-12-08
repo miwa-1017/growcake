@@ -1,5 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
 @import "pages/admin";
+@import "pages/growth_records";
+
 
 .devise-container {
   width: 100%;
@@ -521,3 +523,4 @@ ul {
   width: 180px;
   display: inline-block;
 }
+

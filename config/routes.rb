@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'growth_records/index'
   #マイページ(一般ユーザー用)
   #get 'cake_types/edit'
   #get 'cake_types/update'
@@ -37,8 +38,9 @@ Rails.application.routes.draw do
   resources :growth,only: :show
   resource :cake_type, only:[:edit, :update]
   resource :mypage, only:[:show, :edit, :update]do
-    delete :withdraw
+    delete :withdraw, to:"users#withdraw"
   end
+  resources :growth_records, only:[:index, :create]
 
   #====管理者用==========
     namespace :admin do

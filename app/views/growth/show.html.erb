@@ -24,7 +24,10 @@
         <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
       <% end %>
 
-      <%= link_to "今日の記録を投稿する📸", new_post_path, class: "btn" %>
+      <div class="growth-buttons">
+        <%= link_to "今日の記録を投稿する📷", new_post_path, class: "btn growth-btn" %>
+        <%= link_to "ケーキの成長履歴を見る🍰", growth_records_path, class: "btn growth-btn" %>
+      </div>
 
       <% final_stage = User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>
 
