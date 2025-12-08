@@ -8,7 +8,16 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+         
   validates :name, presence: true, unless: :guest?
+
+  def active_for_authentication?
+    super && !is_deleted && !is_banned
+  end
+
+  def email_required?
+    !is_deleted
+  end
 
   enum cake_type: { unset: 0, tarte: 1, shortcake: 2 }
 

@@ -19,7 +19,12 @@ Rails.application.routes.draw do
     patch '/mypage', to: 'mypage#update'
   end
 
-  resources :users, only: [:show, :index, :destroy]  
+  resources :users, only: [:show, :index, :destroy] do
+    member do
+      patch :withdraw
+    end
+  end
+
   resources :posts do
     collection do
       get :search
@@ -31,10 +36,20 @@ Rails.application.routes.draw do
   get '/growth', to: 'growth#show', as: :growth
   resources :growth,only: :show
   resource :cake_type, only:[:edit, :update]
+  resource :mypage, only:[:show, :edit, :update]do
+    delete :withdraw
+  end
 
   #====管理者用==========
     namespace :admin do
-    resources :users, only: [:index, :destroy]
+    resources :users, only: [:index, :show, :destroy] do
+      member do
+        patch :withdraw
+        patch :ban
+        patch :unban
+      end
+    end
+    
     resources :comments, only: [:destroy]
   end
 end
