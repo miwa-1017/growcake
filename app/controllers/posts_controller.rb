@@ -19,7 +19,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.user_id = current_user.id
+    @post.user_id = current_user.id 
+    @post.stage = current_user.current_stage
+    puts "✨✨ DEBUG: Stage Value is #{@post.stage} ✨✨" 
 
     # ▼▼既存のケーキ画像自動セット▼▼
     current_stage = current_user.total_points

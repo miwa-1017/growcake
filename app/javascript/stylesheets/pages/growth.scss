@@ -8,15 +8,15 @@
 
 /* ===== 成長ステージ背景カラー（ピンク統一Ver） ===== */
 
-.stage-1 { background-color: #FFE8F1; }    /* ほぼ白に近い薄ピンク */
-.stage-2 { background-color: #FFD6E8; }
-.stage-3 { background-color: #ffcce5; }
-.stage-4 { background-color: #ffbcdd; }
-.stage-5 { background-color: #ffadd6; }
-.stage-6 { background-color: #ffb3c6; }
-.stage-7 { background-color: #ff9ece; }
-.stage-8 { background-color: #ff8ec6; }
-.stage-9 { background-color: #ff8fab; }  /* 最終ステージ濃いめ可愛く */
+.post-card.stage-1 { background-color: #ffeaf4; }    /* ほぼ白に近い薄ピンク */
+.post-card.stage-2 { background-color: #ffe5f2; }
+.post-card.stage-3 { background-color: #ffe0ef; }
+.post-card.stage-4 { background-color: #ffdbed; }
+.post-card.stage-5 { background-color: #ffd6ea; }
+.post-card.stage-6 { background-color: #ffcce5; }
+.post-card.stage-7 { background-color: #ffc1e0; }
+.post-card.stage-8 { background-color: #ffb7db; }
+.post-card.stage-9 { background-color: #ffb2d8; }  /* 最終ステージ濃いめ可愛く */
 
 .cake-select {
   text-align: center;

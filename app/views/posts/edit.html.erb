@@ -1,17 +1,21 @@
-<h1>編集</h1>
+<div class="edit-wrapper">
 
-<%= form_with model: @post, local: true do |f| %>
-  <div>
-    <%= f.label :title, "タイトル" %>
-    <%= f.text_field :title %>
-  </div>
+  <h1>編集</h1>
 
-  <div>
-    <%= f.label :body, "内容" %>
-    <%= f.text_area :body %>
-  </div>
+  <%= form_with model: @post, local: true do |f| %>
 
-  <%= f.submit "更新", class: "btn btn-primary" %>
-<% end %>
+    <div>
+      <%= f.label :body, "内容" %>
+      <%= f.text_area :body %>
+    </div>
 
-<%= link_to "戻る", post_path(@post) %>
+    <div class"edit-action-btns">
+
+        <%= f.submit "更新", class: "btn btn-primary" %>
+  <% end %>
+
+      <%= link_to "戻る", post_path(@post), class: "btn btn-back" %>
+
+    </div>
+
+</div>

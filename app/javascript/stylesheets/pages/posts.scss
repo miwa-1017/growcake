@@ -1,7 +1,70 @@
+/* ======================== */
+/* posts.scss の最終修正案 (Showページ中央寄せ対応) */
+/* ======================== */
+
+/* 1. 投稿一覧ページ用の基本スタイル (posts-wrapper) - 変更なしでOK */
 .posts-wrapper {
+  text-align: initial;
+  margin-top: 20px;
+  max-width: none;
+  margin: initial;
+}
+
+/* 2. 編集画面専用のスタイル (.edit-wrapper) - そのまま残します */
+.edit-wrapper {
   text-align: center;
   margin-top: 20px;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
 }
+
+/* 3. ★投稿詳細ページ専用のスタイル (.post-show-wrapper) ★ */
+.post-show-wrapper {
+  text-align: center;
+  margin-top: 20px;
+  
+  /* 【中央寄せ】!importantで強制適用 */
+  max-width: 600px !important; 
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 4. その他共通のスタイル (編集/詳細ページ内の要素) */
+
+/* フォームブロックを中央寄せにする (編集ページ用) */
+.edit-wrapper form {
+  max-width: 400px; 
+  margin: 20px auto !important; 
+}
+
+/* フォーム内の入力欄グループ (編集ページ用) */
+.form-group {
+  max-width: 350px; 
+  margin: 10px auto !important;
+  text-align: left; 
+}
+
+/* フォーム内の入力要素の幅調整 (編集ページ用) */
+.form-group textarea,
+.form-group input[type="text"] {
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+/* ボタン間隔の調整 (編集ページ用) */
+.edit-action-btns {
+  display: flex;             
+  flex-direction: column;    
+  align-items: center;       
+  gap: 15px; 
+}
+
+/* タイトルとフォームの間に余白 (編集ページ用) */
+.edit-wrapper h1 {
+  margin-bottom: 30px; 
+}
+
 
 .posts-container {
   display: flex;
@@ -12,6 +75,17 @@
   justify-content: flex-start;
   align-items: flex-start;
 }
+
+.posts-wrapper form {
+  max-width: 400px; 
+  margin: 20px auto;
+}
+
+.posts-wrapper form > div {
+  max-width: 350px; 
+  margin: 10px auto; 
+}
+
 
 .card-btn {
   display: inline-block;
@@ -76,4 +150,13 @@
 /* ボタン幅統一 */
 .cake-edit-wrapper .actions .btn {
   width: 220px;
+}
+
+/* .edit-action-btns の中のボタンにのみ適用する */
+.edit-action-btns {
+  
+  .btn:first-child { 
+    margin-bottom: 15px; 
+  }
+
 }
