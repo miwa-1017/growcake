@@ -1,7 +1,52 @@
 .history-img {
-  width: 60% !important;
+  width: 300px !important;
+  max-width: 90%;
   height: auto;
   display: block;
   margin: 20px auto;
   border-radius: 10px;
+}
+
+.exercise-title {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.exercise-wrapper {
+  margin-top: 40px;
+}
+
+.exercise-wrapper p {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.exercise-list {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.exercise-item {
+  background-color: #f9e6e9;
+  padding: 8px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  border: 1px solid #e5b6c8;
+}
+
+.today-log {
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+select {
+  font-size: 15px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1.5px solid #e5b6c6;
+  background-color: #fffafc;
 }

@@ -23,11 +23,11 @@
 
     <div class="posts-container">
       <% @posts.each do |post| %>
-        <% stage = post.user.current_stage %>
-        <div class="post-card stage-<%= stage %>">
+        <div class="post-card stage-<%= post.stage %>">
+        <p class="post-user-name"><%= post.user.name %></p>
 
           <% if post.image.attached? %>
-            <%= image_tag post.user.cake_image_for_display, class: "post-card-img" %>
+            <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage + 1)}.png", class: "post-card-img" %>
           <% else %>
             <%= image_tag "cakes/cake_stage_01.png", class: "post-card-img default-img" %>
           <% end %>

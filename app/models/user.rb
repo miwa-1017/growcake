@@ -20,11 +20,11 @@ class User < ApplicationRecord
     !is_deleted
   end
 
-  enum cake_type: { unset: 0, tarte: 1, shortcake: 2 }
+  enum cake_type: { unset: 0, tart: 1, cake: 2 }
 
    GROWTH_STAGES = {
-    tarte:     [0, 10, 20, 30, 40, 50, 60, 70, 80],    
-    shortcake: [0, 10, 20, 30, 40, 50, 60, 70, 80] 
+    tart:     [0, 10, 20, 30, 40, 50, 60, 70, 80],    
+    cake: [0, 10, 20, 30, 40, 50, 60, 70, 80] 
   }
 
   # 現在の合計ポイント

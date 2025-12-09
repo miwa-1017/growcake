@@ -17,9 +17,11 @@ class PostsController < ApplicationController
     @exercise_log = current_user.exercise_logs.find_by(date: Date.today)
   end
 
-  def create
+   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @post.stage = current_user.current_stage            
+    @post.cake_type_at_post = current_user.cake_type  
 
     # ▼▼既存のケーキ画像自動セット▼▼
     current_stage = current_user.total_points
@@ -36,22 +38,18 @@ class PostsController < ApplicationController
 
             # ▼ 成長履歴保存 ▼
       before_stage = current_user.current_stage
-
-      # 👉 point の更新は growth_logs に記録
       current_user.growth_logs.create(growth_point: 1)
-
       after_stage = current_user.current_stage
 
-      # ✔ ステージが変わったら成長履歴作成🎉
-      if after_stage != before_stage
-        GrowthRecord.create(
-          user: current_user,
-          post: @post,
-          stage: after_stage,
-          date: Date.today,
-          comment: "🎉 ステージアップ！"
-        )
-      end
+      comment = after_stage != before_stage ? "🎉 ステージアップ！" : "🍰 今日の投稿！"
+
+      GrowthRecord.create!(
+        user: current_user,
+        post: @post,
+        stage: after_stage,
+        date: Date.today,
+        comment: comment
+      )
 
       redirect_to @post, notice: "投稿しました🍰"
     else

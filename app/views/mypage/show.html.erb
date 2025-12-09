@@ -3,35 +3,33 @@
   <p>メールアドレス：<%= @user.email %></p>
 
   <div class="cake-select">
-    <h3>ケーキタイプ設定</h3>
 
-  <% if current_user.cake_type.blank? %>
-    <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
-      <div class="cake-select-box">
-        <%= f.radio_button :cake_type, :tarte %>
-        <%= f.label :cake_type_tarte, "タルト" %>
+  <h3>ケーキタイプ設定</h3>
 
-        <%= f.radio_button :cake_type, :shortcake %>
-        <%= f.label :cake_type_shortcake, "ショートケーキ" %>
-      </div>
-
-      <%= f.submit "決定する", class: "btn mt-3" %>
+    <% if current_user.cake_type == "unset" %>
+      <%# 初回選択フォーム %>
+      <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
+        <div class="cake-select-box">
+          <%= f.radio_button :cake_type, :tart %> タルト<br>
+          <%= f.radio_button :cake_type, :cake %> ショートケーキ<br>
+        </div>
+        <%= f.submit "決定する", class: "btn mt-3" %>
+      <% end %>
+    <% else %>
+      <p>あなたのケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
+      <%= link_to "変更する", edit_cake_type_path, class: "btn mt-3" %>
     <% end %>
-
-  <% else %>
-    <p>あなたのケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
-    <%= link_to "変更する", edit_cake_type_path, class: "btn mt-3" %>
-  <% end %>
 
   <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
 
-  <div class="mypage-edit-link">
+  <div class="mypage-actions">
     <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn" %>
-    <%= link_to "筋トレの記録を見る", exercise_logs_path, class: "btn btn-outline mt-3" %>
+    <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn btn-outline" %>
+
     <% if current_user.growth_logs.exists? %>
-      <%= link_to "ケーキの成長を見る", growth_path, class: "btn mt-3" %>
+      <%= link_to "ケーキの成長を見る", growth_path, class: "btn" %>
     <% else %>
-      <%= link_to "ケーキを育て始める", growth_path, class: "btn mt-3" %>
+      <%= link_to "ケーキを育て始める", growth_path, class: "btn" %>
     <% end %>
   </div>
 

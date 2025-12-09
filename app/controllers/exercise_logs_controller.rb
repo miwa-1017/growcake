@@ -2,7 +2,7 @@ class ExerciseLogsController < ApplicationController
   before_action :limit_guest_post, only: [:create]
 
   def index
-    @exercise_logs = current_user.exercise_logs
+    @exercise_logs = current_user.exercise_logs.order(created_at: :desc)
   end
 
   def new

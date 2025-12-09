@@ -1,10 +1,10 @@
 <div class="cake-edit-wrapper">
   <h2>ケーキタイプを変更する</h2>
-  <p>現在のケーキタイプ：<strong><%= current_user.cake_type %></strong></p>
+  <p>現在のケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
 
   <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
-    <%= f.radio_button :cake_type, :tarte %> タルト<br>
-    <%= f.radio_button :cake_type, :shortcake %> ショートケーキ<br>
+    <%= f.radio_button :cake_type, :tart %> タルト<br>
+    <%= f.radio_button :cake_type, :cake %> ショートケーキ<br>
 
     <%= f.submit "更新する", class: "btn mt-3" %>
   <% end %>
