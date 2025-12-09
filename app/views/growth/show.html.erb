@@ -16,7 +16,10 @@
       <div class="cake-display">
         <div class="cake-frame-background <%= @user.cake_type %>"></div>
         <%= image_tag "cakes/cake_frame.png", class: "cake-frame" %>
-        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', @stage + 1)}.png", class: "cake-image" %>
+        <% prefix = (@user.cake_type == "tart" ? "tart" : "cake") %>
+        <% stage_number = @stage + 1 %>
+
+        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', stage_number)}.png", class: "cake-image" %>
       </div>
 
     <p>成長段階: <%= @stage + 1 %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %></p>

@@ -2,23 +2,23 @@
   <h2>🍰 成長のあしあと</h2>
   <p>あなたが投稿したケーキがだんだん育っていくよ！</p>
 
-  <% if @growth_records.any? %>
-    <% @growth_records.order(date: :desc).each do |record| %>
-      <div class="history-card">
-        <p class="date">📅 <%= record.date %></p>
-        <p class="stage">🎉 Stage <%= record.stage %> 到達！</p>
+<% if @growth_records.any? %>
+  <% @growth_records.order(date: :desc).each do |record| %>
+    <div class="history-card">
+      <p class="date">📅 <%= record.date %></p>
 
-        <% if record.post.image.attached? %>
-          <%= image_tag record.post.image, class: "history-img" %>
-        <% end %>
+      <p class="stage">🍰 Stage <%= record.stage %> 到達！</p>
 
-        <% if record.comment.present? %>
-          <p class="comment">💬 <%= record.comment %></p>
-        <% end %>
-      </div>
-      <hr>
-    <% end %>
-  <% else %>
-    <p>まだ成長履歴がありません🍀</p>
+      <!-- ステージ画像表示 -->
+      <%= image_tag "cakes/#{record.post.cake_type_at_post}_stage_#{format('%02d', record.stage)}.png", class: "history-img" %>
+
+      <% if record.comment.present? %>
+        <p class="comment">💬 <%= record.comment %></p>
+      <% end %>
+    </div>
+    <hr>
   <% end %>
+<% else %>
+  <p>🍀まだ成長履歴がありません✨</p>
+<% end %>
 </div>

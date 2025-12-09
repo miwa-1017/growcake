@@ -11,6 +11,11 @@ ja:
         dance: "ダンス"
         pilates: "ピラティス"
         ems: "EMS"
+    user:
+      cake_type:
+        unset: "未選択"
+        tart: "タルト"
+        cake: "ショートケーキ"
 
   activerecord:
     attributes:

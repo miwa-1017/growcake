@@ -18,7 +18,7 @@
 
     <% if @post.image.attached? %>
       <div class="post-image">
-        <%= image_tag @post.user.cake_image_for_display, width: "300px" %>
+        <%= image_tag "cakes/#{@post.cake_type_at_post}_stage_#{format("%02d", @post.stage + 1)}.png",class: "post-show-img" %>
       </div>
     <% end %>
 
