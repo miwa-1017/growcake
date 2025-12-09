@@ -1,10 +1,26 @@
 .cake-display { position: relative; width: 350px; margin: 0 auto; }
 
 /* ケーキ背景 */
-.cake-frame-background { position: absolute; width: 110%; height: 80%; top: 10%; left: -5%; border-radius: 20px; }
+/* default */
+.cake-frame-background {
+  position: absolute;
+  top: 10%;
+  left: -5%;
+  width: 110%;
+  height: 80%;
+  border-radius: 20px;
+  z-index: 0;
+}
 
-.cake-frame-background.shortcake { background-color: #ffeef4; }
-.cake-frame-background.tarte { background-color: #f7e4c4; }
+/* ケーキタイプ別デザイン */
+
+.cake-frame-background.cake {
+  background-color: #ffeef4; // ピンク系
+}
+
+.cake-frame-background.tart {
+  background-color: #f7e4c4; // キャラメル/焼き菓子色
+}
 
 /* ===== 成長ステージ背景カラー（ピンク統一Ver） ===== */
 
