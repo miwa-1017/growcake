@@ -61,3 +61,25 @@
 
   body { overflow-x: hidden; }
 }
+
+@media (max-width: 768px) {
+  .search-area {
+    width: 100%;
+    justify-content: center !important;
+    margin-bottom: 10px;
+  }
+
+  .search-input {
+    width: 100%;
+  }
+
+  .site-header {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .header-nav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+}

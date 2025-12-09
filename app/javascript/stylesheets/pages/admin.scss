@@ -39,6 +39,22 @@
     font-weight: bold;
   }
 
+  
+  @media (max-width: 768px) {
+    .users-table {
+      display: block;
+      width: 100%;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .users-table th,
+    .users-table td {
+      padding: 8px;
+      font-size: 14px;
+    }
+  }
+
   /* 削除ボタン */
   .btn-delete {
     background-color: #e07c82;
