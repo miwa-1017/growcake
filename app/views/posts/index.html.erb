@@ -23,8 +23,9 @@
 
     <div class="posts-container">
       <% @posts.each do |post| %>
-        <% stage = post.user.current_stage %>
+        <% stage = post.user.current_stage + 1 %>
         <div class="post-card stage-<%= stage %>">
+        <p class="post-user-name"><%= post.user.name %></p>
 
           <% if post.image.attached? %>
             <%= image_tag post.user.cake_image_for_display, class: "post-card-img" %>

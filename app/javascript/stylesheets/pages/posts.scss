@@ -1,0 +1,79 @@
+.posts-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 20px;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.card-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: #ffb7c5;
+  padding: 7px 15px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.card-btn:hover {
+  background: #ff9daf;
+}
+
+.guest-actions .btn {
+  margin: 5px auto;
+}
+
+/* ==== 投稿フォーム専用デザイン ==== */
+
+.cake-edit-wrapper {
+  max-width: 480px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* 入力エリア全体 */
+.cake-edit-wrapper form {
+  width: 100%;
+}
+
+/* コメント欄 */
+.cake-edit-wrapper textarea {
+  width: 100% !important;
+  min-height: 120px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  resize: none;
+}
+
+/* 余白 */
+.cake-edit-wrapper .field {
+  margin-bottom: 20px;
+}
+
+/* 注意書き */
+.cake-edit-wrapper .field-note {
+  font-size: 13px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+}
+
+/* ボタン中央揃え */
+.cake-edit-wrapper .actions {
+  text-align: center;
+  margin-top: 25px;
+}
+
+/* ボタン幅統一 */
+.cake-edit-wrapper .actions .btn {
+  width: 220px;
+}

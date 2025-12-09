@@ -18,9 +18,14 @@
   <% if @exercise_logs.any? %>
     <ul>
       <% @exercise_logs.each do |log| %>
-        <li>
-          <%= I18n.t("enums.exercise_log.category.#{log.category}") %>
-          （<%= log.minutes %>分）
+        <li style="margin-bottom: 10px;">
+          <span style="color: #b37b85; font-weight: bold;">
+            📅 <%= log.created_at.strftime("%-m月%-d日") %>
+          </span><br>
+
+          <span>
+            <%= I18n.t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分）
+          </span>
         </li>
       <% end %>
     </ul>

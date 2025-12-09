@@ -1,0 +1,59 @@
+.cake-display { position: relative; width: 350px; margin: 0 auto; }
+
+/* ケーキ背景 */
+.cake-frame-background { position: absolute; width: 110%; height: 80%; top: 10%; left: -5%; border-radius: 20px; }
+
+.cake-frame-background.shortcake { background-color: #ffeef4; }
+.cake-frame-background.tarte { background-color: #f7e4c4; }
+
+/* ===== 成長ステージ背景カラー（ピンク統一Ver） ===== */
+
+.stage-1 { background-color: #FFE8F1; }    /* ほぼ白に近い薄ピンク */
+.stage-2 { background-color: #FFD6E8; }
+.stage-3 { background-color: #ffcce5; }
+.stage-4 { background-color: #ffbcdd; }
+.stage-5 { background-color: #ffadd6; }
+.stage-6 { background-color: #ffb3c6; }
+.stage-7 { background-color: #ff9ece; }
+.stage-8 { background-color: #ff8ec6; }
+.stage-9 { background-color: #ff8fab; }  /* 最終ステージ濃いめ可愛く */
+
+.cake-select {
+  text-align: center;
+  margin: 10px 0;
+}
+
+.cake-select form {
+  display: inline-block;
+  text-align: left;
+  margin: 0 auto;
+  width: fit-content;
+}
+
+.cake-display {
+  position: relative;
+  width: 350px;
+  margin: 0 auto;
+}
+
+.cake-frame {
+  width: 140%;
+  position: absolute;
+  top: -1%;
+  left: -20%;
+  z-index: 1;
+}
+
+.cake-image {
+  width: 100%;
+  top: -1%;
+  position: relative;
+  z-index: 2;
+}
+
+.cake-edit-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
