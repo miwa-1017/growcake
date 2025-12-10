@@ -1,36 +1,12 @@
 <div class="exercise-wrapper text-center">
-  <h2><%= @user.is_deleted? ? "退会済みユーザー" : @user.name %> さんのページ</h2>
-  <p>メールアドレス：<%= @user.email %></p>
 
-  <div class="cake-select">
-    <h3>ケーキタイプ設定</h3>
+  <h2><%= @user.name %> さんのページ</h2>
+  <p>メールアドレス：非公開</p>
 
-    <% if current_user.cake_type.blank? %>
-      <%= form_with model: current_user, url: mypage_path, method: :patch, local: true do |f| %>
-        <div>
-          <%= f.radio_button :cake_type, :tarte %>
-          <%= f.label :cake_type_tarte, "タルト" %>
-        </div>
+ 
 
-        <div>
-          <%= f.radio_button :cake_type, :shortcake %>
-          <%= f.label :cake_type_shortcake, "ショートケーキ" %>
-        </div>
-
-        <%= f.submit "決定する", class: "btn mt-3" %>
-      <% end %>
-
-    <% else %>
-      <p>あなたのケーキタイプ：<strong><%= current_user.cake_type %></strong></p>
-      <%= link_to "変更する", mypage_path, method: :patch, class: "btn mt-3" %>
-    <% end %>
+  <div class="mypage-actions mt-4">
+    <%= link_to "このユーザーの成長のあしあとを見る", growth_records_path(user_id: @user.id), class: "btn" %>
   </div>
 
-  <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
-
-  <!-- 🍰ここは if の外側！どんな状態でも表示 -->
-  <div class="mypage-edit-link">
-    <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn" %>
-    <%= link_to "筋トレの記録を見る", exercise_logs_path, class: "btn btn-outline mt-3" %>
-  </div>
 </div>

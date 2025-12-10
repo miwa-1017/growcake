@@ -2,9 +2,13 @@ class GrowthRecordsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # ログイン中ユーザーの成長履歴だけ表示
-    @growth_record  = GrowthRecord.new
-    @growth_records = current_user.growth_records.includes(:post).order(date: :desc)
+    if params[:user_id]
+      @user = User.find(params[:user_id])
+    else
+      @user = current_user
+    end
+
+    @growth_records = @user.growth_records.includes(:post).order(date: :desc)
   end
 
   def create

@@ -1,6 +1,11 @@
 <div class="history-wrapper text-center">
-  <h2>🍰 成長のあしあと</h2>
-  <p>あなたが投稿したケーキがだんだん育っていくよ！</p>
+  <% if @user == current_user %>
+    <h2>成長のあしあと</h2>
+    <p>あなたが投稿したケーキがだんだん育っていくよ！</p>
+  <% else %>
+    <h2><%= @user.name %> さんの成長のあしあと</h2>
+    <p><%= @user.name %> さんのケーキの成長記録です。</p>
+  <% end %>
 
 <% if @growth_records.any? %>
   <% @growth_records.order(date: :desc).each do |record| %>
@@ -21,4 +26,8 @@
 <% else %>
   <p>🍀まだ成長履歴がありません✨</p>
 <% end %>
+
+  <div class="back-btn mt-4">
+    <%= link_to "戻る", mypage_path, class: "btn" %>
+  </div>
 </div>

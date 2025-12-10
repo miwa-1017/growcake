@@ -2,7 +2,6 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = current_user
     @user = User.find(params[:id])
     if @user.is_deleted?
       raise ActiveRecord::RecordNotFound

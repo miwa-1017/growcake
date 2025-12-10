@@ -46,4 +46,8 @@
         data-stage="<%= @stage %>"
         data-max="<%= User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>">
       </div>
+
+    <div class="back-btn mt-4">
+      <%= link_to "戻る", mypage_path, class: "btn" %>
+    </div>
 </div>
