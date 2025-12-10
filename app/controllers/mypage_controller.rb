@@ -9,9 +9,10 @@ class MypageController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to mypage_path, notice: "ケーキタイプを更新しました"
+      redirect_to mypage_path, notice: "マイページ情報を更新しました"
     else
-      render :show, alert: "更新に失敗しました"
+      flash.now[:alert] = "更新に失敗しました"
+      render :edit
     end
   end
 
@@ -29,6 +30,6 @@ class MypageController < ApplicationController
   end
 
   def user_params
-    params.permit(:cake_type)
+    params.require(:user).permit(:name, :cake_type)
   end
 end

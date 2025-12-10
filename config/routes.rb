@@ -30,7 +30,7 @@ Rails.application.routes.draw do
     collection do
       get :search
     end
-    resources :comments, only: :create
+    resources :comments, only: [:create, :destroy]
   end
   resources :exercise_logs, only: [:index, :new, :create]
   resources :growth_logs, only: [ :create]

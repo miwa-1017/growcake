@@ -1,8 +1,15 @@
 <div class="post-show-wrapper">
 
   <% if @post.exercise.present? %>
+    <% raw = @post.exercise %>
+
+    <% category = raw.match(/^[a-z_]+/).to_s %>
+    <% minutes = raw.match(/\((\d+)分\)/)&.captures&.first %>
+
+    <% jp_name = I18n.t("enums.exercise_log.category.#{category}", default: category) %>
+
     <p class="exercise-text">
-      🏃‍♀️ 今日の運動：<strong><%= @post.exercise %></strong>
+      ✨ 今日の運動： <strong><%= "#{jp_name}(#{minutes}分)" %></strong>
     </p>
   <% end %>
   
@@ -31,7 +38,9 @@
     <hr>
 
   <h3>コメントを書く</h3>
-
+    <% if @comment && @comment.errors.any? %>
+      <p class="text-danger">コメントを入力してください。</p>
+    <% end %>
     <% if user_signed_in? && current_user.email != "guest@example.com" %>
       <%= form_with model: [@post, Comment.new], local: true do |f| %>
         <%= f.text_area :content, placeholder: "コメントを書く...", rows: 2 %><br>
@@ -46,12 +55,26 @@
    <h3>コメント一覧</h3> 
 
     <% @post.comments.each do |comment| %>
+      <% next unless comment.persisted? %>
       <p>
         <strong><%= comment.user.name %>：</strong>
         <%= comment.content %>
       </p>
-      <% if current_user == comment.user || current_user&.admin? %>
-        <%= link_to "削除", admin_comment_path(comment), method: :delete, data: { confirm: "本当に削除しますか？" }, class: "btn btn-danger" %>
+      <% if current_user == comment.user %>
+        <!-- 自分のコメント削除（一般ユーザー用ルート） -->
+        <%= link_to "削除", 
+                    post_comment_path(@post, comment), 
+                    method: :delete, 
+                    data: { confirm: "本当に削除しますか？" }, 
+                    class: "btn btn-danger" %>
+
+      <% elsif current_user&.admin? %>
+        <!-- 管理者による削除（adminルート） -->
+        <%= link_to "削除", 
+                    admin_comment_path(comment), 
+                    method: :delete, 
+                    data: { confirm: "本当に削除しますか？" }, 
+                    class: "btn btn-danger" %>
       <% end %>
     <% end %>
   

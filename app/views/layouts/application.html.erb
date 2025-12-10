@@ -18,10 +18,10 @@
       <header class="site-header px-4 py-3">
 
        <% if user_signed_in? %>
-        <div class="search-area d-flex justify-content-end mb-2">
-          <%= form_with url: posts_path, method: :get, local: true, class: "search-form d-flex align-items-center" do %>
-            <%= text_field_tag :keyword, params[:keyword], placeholder: "検索...", class: "search-input me-2" %>
-            <%= submit_tag "🔍", class: "search-button" %>
+        <div class="search-area d-flex">
+          <%= form_with url: users_path, method: :get, local: true, class: "d-flex" do |f| %>
+            <%= f.text_field :keyword, placeholder: "ユーザー名で検索", class: "form-control me-2" %>
+            <%= f.submit "🔍", class: "search-button" %>
           <% end %>
         </div>
       <% end %>
@@ -47,9 +47,9 @@
 
                   <%= link_to "About", about_path, class: 'nav-link me-3' %>
 
-                  <%= link_to "投稿一覧", posts_path, class: 'nav-link me-3' %>
-
                   <% if user_signed_in? %>
+                    <%= link_to "投稿一覧", posts_path, class: "nav-link me-3" %>
+
                     <% if current_user.email == "guest@example.com" %>
                       <span class="nav-link deisabled-link">ゲストユーザー</span>
                       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link me-3" %>

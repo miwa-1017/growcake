@@ -10,7 +10,11 @@ class UsersController < ApplicationController
 
 
   def index
-    @users = User.all
+    if params[:keyword].present?
+      @users = User.where("name LIKE ?", "%#{params[:keyword]}%")
+    else
+      @users = User.all
+    end
   end
 
   def destroy

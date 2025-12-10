@@ -9,4 +9,8 @@
     <%= link_to "このユーザーの成長のあしあとを見る", growth_records_path(user_id: @user.id), class: "btn" %>
   </div>
 
+  <div class="back-btn mt-4">
+    <%= link_to "戻る", request.referer || root_path, class: "btn" %>
+  </div>
+
 </div>

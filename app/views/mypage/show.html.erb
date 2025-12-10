@@ -44,6 +44,10 @@
       <% else %>
         <%= link_to "ケーキを育てる", growth_path, class: "btn btn-outline" %>
       <% end %>
+
+      <div class="back-btn mt-4">
+        <%= link_to "戻る", request.referer || root_path, class: "btn" %>
+      </div>
     </div>
 
 </div>
