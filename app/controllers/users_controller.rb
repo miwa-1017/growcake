@@ -3,6 +3,10 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+    @user = User.find(params[:id])
+    if @user.is_deleted?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
 

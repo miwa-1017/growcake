@@ -3,6 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_exercise_log, only: [:new, :edit, :update]
+  before_action :forbid_guest, only: [:new, :create, :edit, :update, :destroy]
 
  
   def index

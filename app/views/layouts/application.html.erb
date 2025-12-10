@@ -51,7 +51,8 @@
 
                   <% if user_signed_in? %>
                     <% if current_user.email == "guest@example.com" %>
-                      <%= link_to "ゲストログイン中", "#", class: "disabled-link" %>
+                      <span class="nav-link deisabled-link">ゲストユーザー</span>
+                      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link me-3" %>
                     <% else %>
                       <%= link_to "マイページ", mypage_path, class: "nav-link me-3" %>
                       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link me-3" %>

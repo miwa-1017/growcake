@@ -24,7 +24,9 @@
     <div class="posts-container">
       <% @posts.each do |post| %>
         <div class="post-card stage-<%= post.stage %>">
-        <p class="post-user-name"><%= post.user.name %></p>
+        <p class="post-user-name">
+          <%= link_to post.user.name, user_path(post.user), class: "user-link" %>
+        </p>
 
           <% if post.image.attached? %>
             <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage + 1)}.png", class: "post-card-img" %>

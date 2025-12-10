@@ -1,7 +1,10 @@
 class MypageController < ApplicationController
   before_action :set_current_user
+  before_action :forbid_guest, only: [:update]
+  before_action :authenticate_user!
 
   def show
+    @user = current_user
   end
 
   def update
@@ -20,6 +23,7 @@ class MypageController < ApplicationController
 
   def set_current_user
     @user = current_user
+    return unless @user
     @exercise_logs = current_user.exercise_logs
     @growth_point = current_user.growth_logs.sum(:growth_point)
   end

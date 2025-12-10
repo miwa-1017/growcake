@@ -1,36 +1,48 @@
 <div class="exercise-wrapper text-center">
-  <h2><%= @user.name %> さんのページ</h2>
-  <p>メールアドレス：<%= @user.email %></p>
 
-  <div class="cake-select">
+  <% if guest_user? && @user.present? %>
+    <h2><%= @user.name %> さんのページ</h2>
+    <p>メールアドレス：<%= @user.email %></p>
 
-  <h3>ケーキタイプ設定</h3>
+    <div class="mypage-actions">
+      <%= link_to "投稿一覧を見る", posts_path, class: "btn" %>
+    </div>
 
-    <% if current_user.cake_type == "unset" %>
-      <%# 初回選択フォーム %>
-      <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
-        <div class="cake-select-box">
-          <%= f.radio_button :cake_type, :tart %> タルト<br>
-          <%= f.radio_button :cake_type, :cake %> ショートケーキ<br>
-        </div>
-        <%= f.submit "決定する", class: "btn mt-3" %>
+    <%# ここでゲスト専用表示は終了 %>
+    <% return %>
+  <% end %>
+    <h2><%= @user.name %> さんのページ</h2>
+    <p>メールアドレス：<%= @user.email %></p>
+
+    <div class="cake-select">
+
+    <h3>ケーキタイプ設定</h3>
+
+      <% if current_user.cake_type == "unset" %>
+        <%# 初回選択フォーム %>
+        <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
+          <div class="cake-select-box">
+            <%= f.radio_button :cake_type, :tart %> タルト<br>
+            <%= f.radio_button :cake_type, :cake %> ショートケーキ<br>
+          </div>
+          <%= f.submit "決定する", class: "btn mt-3" %>
+        <% end %>
+      <% else %>
+        <p>あなたのケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
+        <%= link_to "変更する", edit_cake_type_path, class: "btn mt-3" %>
       <% end %>
-    <% else %>
-      <p>あなたのケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
-      <%= link_to "変更する", edit_cake_type_path, class: "btn mt-3" %>
-    <% end %>
 
-  <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
+    <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
 
-  <div class="mypage-actions">
-    <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn" %>
-    <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn btn-outline" %>
+    <div class="mypage-actions">
+      <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn" %>
+      <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn btn-outline" %>
 
-    <% if current_user.growth_logs.exists? %>
-      <%= link_to "ケーキの成長を見る", growth_path, class: "btn" %>
-    <% else %>
-      <%= link_to "ケーキを育て始める", growth_path, class: "btn" %>
-    <% end %>
-  </div>
+      <% if current_user.growth_logs.exists? %>
+        <%= link_to "ケーキの成長を見る", growth_path, class: "btn" %>
+      <% else %>
+        <%= link_to "ケーキを育て始める", growth_path, class: "btn" %>
+      <% end %>
+    </div>
 
 </div>
