@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_12_09_012534) do
+ActiveRecord::Schema.define(version: 2025_12_09_043830) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -80,15 +80,8 @@ ActiveRecord::Schema.define(version: 2025_12_09_012534) do
     t.index ["user_id"], name: "index_growth_records_on_user_id"
   end
 
-  create_table "posts", force: :cascade do |t|
-    t.text "body"
-    t.integer "user_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "exercise"
-    t.integer "stage"
-    t.index ["user_id"], name: "index_posts_on_user_id"
-  end
+# Could not dump table "posts" because of following StandardError
+#   Unknown type 'stiring' for column 'cake_type_at_post'
 
 # Could not dump table "users" because of following StandardError
 #   Unknown type '' for column 'default'

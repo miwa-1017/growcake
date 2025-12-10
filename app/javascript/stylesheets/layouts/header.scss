@@ -83,3 +83,22 @@
     flex-wrap: wrap;
   }
 }
+
+.search-area {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.search-button {
+  background-color: #d9c7b4!important;  // ← ふんわりベージュ
+  border: none!important;
+  padding: 6px 10px!important;
+  border-radius: 6px!important;
+  cursor: pointer!important;
+
+  &:hover {
+    background-color: #cdb9a4!important;  // 少し濃いベージュでホバー
+  }
+}

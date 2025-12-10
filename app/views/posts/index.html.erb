@@ -7,7 +7,7 @@
         class: "form-select" %>
 
   <%= select_tag :cake_type,
-        options_for_select([["ケーキタイプ(指定なし)", ""], ["ショートケーキ", "shortcake"], ["タルト", "tarte"]]),
+        options_for_select([["ケーキタイプ(指定なし)", ""], ["ショートケーキ", "cake"], ["タルト", "tart"]]),
         class: "form-select" %>
 
   <%= select_tag :growth_status,
@@ -19,12 +19,14 @@
 
   <% end %>
 
-    <h2>みんなの投稿</h2>
+    <h2 class="posts-title">みんなの投稿</h2>
 
     <div class="posts-container">
       <% @posts.each do |post| %>
         <div class="post-card stage-<%= post.stage %>">
-        <p class="post-user-name"><%= post.user.name %></p>
+        <p class="post-user-name">
+          <%= link_to post.user.name, user_path(post.user), class: "user-link" %>
+        </p>
 
           <% if post.image.attached? %>
             <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage + 1)}.png", class: "post-card-img" %>
@@ -62,10 +64,6 @@
           <div class="post-card-actions">
             <%= link_to "詳しく見る", post_path(post), class: "card-btn" %>
           </div>
-
-          <% if post.user == current_user %>
-            <%= link_to "編集", edit_post_path(post), class: "card-btn" %>
-          <% end %>
         </div>
       <% end %>
     </div>

@@ -1,5 +1,6 @@
 class GrowthLogsController < ApplicationController
   before_action :authenticate_user!
+  before_action :forbid_guest
 
   def new
     redirect_to growth_path

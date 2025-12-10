@@ -1,0 +1,35 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">ユーザー一覧</h2>
+
+  <% if params[:keyword].present? %>
+    <p class="text-center text-muted">
+      検索キーワード：<strong><%= params[:keyword] %></strong>
+    </p>
+  <% end %>
+
+  <% if @users.any? %>
+    <table class="table table-striped mt-3">
+      <thead>
+        <tr>
+          <th>ユーザー名</th>
+          <th>メールアドレス</th>
+          <th>詳細</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+            <td>非公開</td>
+            <td>
+              <%= link_to "プロフィールを見る", user_path(user), class: "btn btn-outline-primary btn-sm" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p class="text-center text-muted mt-4">該当するユーザーはいませんでした。</p>
+  <% end %>
+</div>

@@ -1,5 +1,6 @@
 class ExerciseLogsController < ApplicationController
-  before_action :limit_guest_post, only: [:create]
+  before_action :authenticate_user!
+  before_action :forbid_guest
 
   def index
     @exercise_logs = current_user.exercise_logs.order(created_at: :desc)
@@ -27,13 +28,6 @@ class ExerciseLogsController < ApplicationController
   end
 
   private
-
-  # 🧁ゲストは1回だけ投稿可能
-  def limit_guest_post
-    if current_user.email == "guest@example.com" && current_user.exercise_logs.exists?
-      redirect_to exercise_logs_path, alert: "ゲストユーザーは1回のみ投稿できます🍰 続ける場合は会員登録してください💗"
-    end
-  end
 
   def exercise_log_params
     params.require(:exercise_log).permit(:category, :minutes)

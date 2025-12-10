@@ -2,12 +2,19 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def show
-    @user = current_user
+    @user = User.find(params[:id])
+    if @user.is_deleted?
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
 
   def index
-    @users = User.all
+    if params[:keyword].present?
+      @users = User.where("name LIKE ?", "%#{params[:keyword]}%")
+    else
+      @users = User.all
+    end
   end
 
   def destroy

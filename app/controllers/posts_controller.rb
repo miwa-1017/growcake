@@ -1,8 +1,9 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!,except: [:index, :show]
+  before_action :authenticate_user!
   before_action :set_post, only: [:show, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
   before_action :set_exercise_log, only: [:new, :edit, :update]
+  before_action :forbid_guest, only: [:new, :create, :edit, :update, :destroy]
 
  
   def index
@@ -10,6 +11,8 @@ class PostsController < ApplicationController
   end
 
   def show
+    @comment = Comment.new
+    @comments = @post.comments
   end
 
   def new
@@ -30,6 +33,13 @@ class PostsController < ApplicationController
     formatted_index = format("%02d", stage_index)
     cake_path = Rails.root.join("app/assets/images/cakes/#{prefix}_stage_#{formatted_index}.png")
     @post.image.attach(io: File.open(cake_path), filename: "#{prefix}_stage_#{formatted_index}.png")
+
+    latest_log = current_user.exercise_logs.where(date: Date.today).last
+
+    if latest_log.present?
+      jp_name = I18n.t("exercise_log.category.#{latest_log.category}")
+      @post.exercise = "#{jp_name}(#{latest_log.minutes}分)"
+    end
 
     if @post.save
       # -------------------------
@@ -77,13 +87,11 @@ class PostsController < ApplicationController
     @posts = Post.all
 
     if params[:exercise].present?
-      @posts = @posts.joins(user: :exercise_logs)
-                    .where(exercise_logs: { category: params[:exercise] })
-                    .distinct  
+      @posts = @posts.where("exercise LIKE ?", "#{params[:exercise]}%")
     end
 
     if params[:cake_type].present?
-      @posts = @posts.joins(:user).where(users: { cake_type: params[:cake_type] })
+      @posts = @posts.where(cake_type_at_post: params[:cake_type])
     end
 
     if params[:growth_status] == "finished"
