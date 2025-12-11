@@ -35,17 +35,9 @@
           <% end %>
 
           <div class="post-card-content">
-            <% logs = post.user.exercise_logs.where(date: Date.today) %>
-              <p class="post-exercise">
-                ✨
-                <% if logs.present? %>
-                  <% logs.each do |log| %>
-                    <%= t("enums.exercise_log.category.#{log.category}") %>（<%= log.minutes %>分)<br>
-                  <% end %>
-                <% else %>
-                  運動なし
-                <% end %>
-              </p>
+            <p class="post-exercise">
+              ✨ <%= post.exercise.present? ? post.exercise : "運動なし" %>
+            </p>
             <p class="post-body"><%= truncate(post.body, length: 30) %></p>
             <p class="post-date">📅 <%= post.created_at.strftime("%Y/%m/%d") %></p>
           </div>

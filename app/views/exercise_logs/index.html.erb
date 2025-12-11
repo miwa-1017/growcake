@@ -10,7 +10,7 @@
       <%= link_to "新規登録する", new_user_registration_path, class: "btn btn-primary" %>
     </div>
   <% else %>
-    <%= link_to "今日の投稿を記録する", new_exercise_log_path, class: "btn btn-primary" %>
+    <%= link_to "今日の運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
   <% end %>
 
   <p>累計ポイント：<%= current_user.growth_logs.sum(:growth_point) %> pt </p>
