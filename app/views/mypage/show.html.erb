@@ -40,7 +40,7 @@
       <%= link_to "ケーキの成長履歴を見る", growth_records_path, class: "btn" %>
 
       <% if current_user.growth_logs.exists? %>
-        <%= link_to "ケーキの成長を見る", growth_path, class: "btn" %>
+        <%= link_to "ケーキを育てる<br>投稿する".html_safe, growth_path, class: "btn btn-outline" %>
       <% else %>
         <%= link_to "ケーキを育てる", growth_path, class: "btn btn-outline" %>
       <% end %>

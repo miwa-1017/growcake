@@ -23,40 +23,47 @@ class PostsController < ApplicationController
    def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
-    @post.stage = current_user.current_stage            
-    @post.cake_type_at_post = current_user.cake_type  
+    @post.stage = current_user.current_stage
+    @post.cake_type_at_post = current_user.cake_type
 
-    # ▼▼既存のケーキ画像自動セット▼▼
+    # ▼ ケーキ画像の自動セット ▼
     current_stage = current_user.total_points
-    stage_index = User::GROWTH_STAGES[current_user.cake_type.to_sym].select { |s| s <= current_stage }.count
+    stage_index = User::GROWTH_STAGES[current_user.cake_type.to_sym]
+                    .select { |s| s <= current_stage }.count
     prefix = current_user.cake_type == "shortcake" ? "cake" : "tart"
     formatted_index = format("%02d", stage_index)
     cake_path = Rails.root.join("app/assets/images/cakes/#{prefix}_stage_#{formatted_index}.png")
     @post.image.attach(io: File.open(cake_path), filename: "#{prefix}_stage_#{formatted_index}.png")
 
-    latest_log = current_user.exercise_logs.where(date: Date.today).last
+    # ▼ 今日の運動ログ（複数）を取得
+    today_logs = current_user.exercise_logs.where(date: Date.today)
 
-    if latest_log.present?
-      jp_name = I18n.t("exercise_log.category.#{latest_log.category}")
-      @post.exercise = "#{jp_name}(#{latest_log.minutes}分)"
+    if today_logs.present?
+      exercises = today_logs.map do |log|
+        jp_name = I18n.t("enums.exercise_log.category.#{log.category}")
+        "#{jp_name}(#{log.minutes}分)"
+      end
+
+      @post.exercise = exercises.join("・")  # 「・」で区切って保存
+    else
+      @post.exercise = nil
     end
 
     if @post.save
-      # -------------------------
-      # 成長履歴自動保存ロジック
-      # -------------------------
-
-            # ▼ 成長履歴保存 ▼
+      # ▼ 成長履歴自動保存 ▼
       before_stage = current_user.current_stage
       current_user.growth_logs.create(growth_point: 1)
       after_stage = current_user.current_stage
+
+      # 画像の表示と合わせるため +1 した値を保存
+      display_stage = after_stage + 1  
 
       comment = after_stage != before_stage ? "🎉 ステージアップ！" : "🍰 今日の投稿！"
 
       GrowthRecord.create!(
         user: current_user,
         post: @post,
-        stage: after_stage,
+        stage: display_stage,
         date: Date.today,
         comment: comment
       )
@@ -65,9 +72,6 @@ class PostsController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
   end
 
   def update

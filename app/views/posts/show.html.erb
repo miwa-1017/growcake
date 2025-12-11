@@ -1,15 +1,9 @@
 <div class="post-show-wrapper">
 
   <% if @post.exercise.present? %>
-    <% raw = @post.exercise %>
-
-    <% category = raw.match(/^[a-z_]+/).to_s %>
-    <% minutes = raw.match(/\((\d+)分\)/)&.captures&.first %>
-
-    <% jp_name = I18n.t("enums.exercise_log.category.#{category}", default: category) %>
-
+    
     <p class="exercise-text">
-      ✨ 今日の運動： <strong><%= "#{jp_name}(#{minutes}分)" %></strong>
+      今日の運動：<strong><%= @post.exercise %></strong>
     </p>
   <% end %>
   
