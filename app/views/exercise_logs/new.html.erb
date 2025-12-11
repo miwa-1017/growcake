@@ -11,7 +11,7 @@
 
       <div class="form-group">
         <%= f.label :minutes, "時間（分）" %><br>
-        <%= f.number_field :minutes %>
+        <%= f.select :minutes, [5,10,15,20,25,30,40,50,60,70,80,90,100,110,120].map { |m| ["#{m}分", m] }, {}, class: "form-select" %>
       </div>
 
       <%= f.submit "保存", class: "btn btn-primary mt-3" %>

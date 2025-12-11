@@ -1,0 +1,6 @@
+<div class="cake-wrapper">
+  <% total = @growth_log.total_point || 0 %>
+  <% stage = (total / 10).clamp(1, 9) %>
+
+  <%= image_tag("cakes/tart_stage_#{stage}.png", class: "cake-image") %>
+</div>

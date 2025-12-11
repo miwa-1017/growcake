@@ -1,0 +1,27 @@
+<div class="cake-edit-wrapper">
+
+  <h2>マイページ編集</h2>
+
+  <div class="mypage-edit-wrapper">
+
+    <%= form_with model: current_user, url: mypage_path, method: :patch do |f| %>
+      <div class="form-item">
+        <%= f.label :name, "名前" %>
+        <%= f.text_field :name %>
+      </div>
+
+      <%= f.submit "更新する", class: "btn" %>
+    <% end %>
+
+    <%= link_to "退会する", withdraw_mypage_path,
+        method: :delete,
+        data: { confirm: "本当に退会しますか？\n※データは削除され復元できません。" },
+        class: "btn btn-danger" %>
+
+  </div>
+
+  <div class="back-btn mt-4">
+    <%= link_to "戻る", mypage_path, class: "btn" %>
+  </div>
+
+</div>

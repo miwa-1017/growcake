@@ -1,0 +1,31 @@
+.cake-frame-background {
+  position: absolute;
+  top: 10%;
+  left: -5%;
+  width: 110%;
+  height: 80%;
+  border-radius: 20px;
+  z-index: 0;
+}
+
+.cake-frame-background.shortcake {
+  background-color: #ffeef4;
+}
+
+.cake-frame-background.tarte {
+  background-color: #f7e4c4;
+}
+
+.confetti-piece {
+  position: fixed;
+  top: -10px;
+  opacity: 0.9;
+  transform: rotate(0deg);
+  animation-name: fall;
+  animation-timing-function: linear;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-10vh) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(720deg); }
+}

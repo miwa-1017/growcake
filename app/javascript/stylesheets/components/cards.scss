@@ -1,0 +1,29 @@
+.post-card {
+  background: #fff5f9;
+  border-radius: 15px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+  padding: 5px;
+  text-align: center;
+  transition: 0.2s ease;
+  width: 220px;
+}
+
+.post-card:hover { transform: scale(1.03); }
+
+.post-card-img {
+  width: 140px;
+  border-radius: 10px;
+}
+
+.post-user { font-weight: bold; font-size: 16px; }
+.post-date { font-size: 12px; color: #777; }
+
+.card-btn {
+  background: #ffb7c5;
+  padding: 7px 15px;
+  border-radius: 10px;
+  color: white;
+  display: inline-block;
+}
+
+.card-btn:hover { background: #ff9daf; }

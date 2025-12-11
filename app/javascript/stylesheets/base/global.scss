@@ -1,0 +1,28 @@
+body {
+  background-color: #f6f1e2;
+  color: #5B4A42;          
+  line-height: 1.8;
+  font-family: 'Zen Maru Gothic', serif;
+}
+
+h1, h2 {
+  color: #4A3B35;
+  font-weight: 600;
+}
+
+a {
+  color: #D26A54;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  color: #A7483A;
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}

@@ -1,0 +1,176 @@
+/* ======================== */
+/* posts.scss の最終修正案 (Showページ中央寄せ対応) */
+/* ======================== */
+
+/* 1. 投稿一覧ページ用の基本スタイル (posts-wrapper) - 変更なしでOK */
+.posts-wrapper {
+  text-align: initial;
+  margin-top: 20px;
+  max-width: none;
+  margin: initial;
+}
+
+/* 2. 編集画面専用のスタイル (.edit-wrapper) - そのまま残します */
+.edit-wrapper {
+  text-align: center;
+  margin-top: 20px;
+  max-width: 600px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 3. ★投稿詳細ページ専用のスタイル (.post-show-wrapper) ★ */
+.post-show-wrapper {
+  text-align: center;
+  margin-top: 20px;
+  
+  /* 【中央寄せ】!importantで強制適用 */
+  max-width: 600px !important; 
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+/* 4. その他共通のスタイル (編集/詳細ページ内の要素) */
+
+/* フォームブロックを中央寄せにする (編集ページ用) */
+.edit-wrapper form {
+  max-width: 400px; 
+  margin: 20px auto !important; 
+}
+
+/* フォーム内の入力欄グループ (編集ページ用) */
+.form-group {
+  max-width: 350px; 
+  margin: 10px auto !important;
+  text-align: left; 
+}
+
+/* フォーム内の入力要素の幅調整 (編集ページ用) */
+.form-group textarea,
+.form-group input[type="text"] {
+  width: 100%;
+  box-sizing: border-box; 
+}
+
+/* ボタン間隔の調整 (編集ページ用) */
+.edit-action-btns {
+  display: flex;             
+  flex-direction: column;    
+  align-items: center;       
+  gap: 15px; 
+}
+
+/* タイトルとフォームの間に余白 (編集ページ用) */
+.edit-wrapper h1 {
+  margin-bottom: 30px; 
+}
+
+
+.posts-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3px;
+  margin-top: 20px;
+  padding: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.posts-wrapper form {
+  max-width: 400px; 
+  margin: 20px auto;
+}
+
+.posts-wrapper form > div {
+  max-width: 350px; 
+  margin: 10px auto; 
+}
+
+
+.card-btn {
+  display: inline-block;
+  margin-top: 10px;
+  background: #ffb7c5;
+  padding: 7px 15px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.card-btn:hover {
+  background: #ff9daf;
+}
+
+.guest-actions .btn {
+  margin: 5px auto;
+}
+
+/* ==== 投稿フォーム専用デザイン ==== */
+
+.cake-edit-wrapper {
+  max-width: 480px;
+  margin: 40px auto;
+  text-align: center;
+}
+
+/* 入力エリア全体 */
+.cake-edit-wrapper form {
+  width: 100%;
+}
+
+/* コメント欄 */
+.cake-edit-wrapper textarea {
+  width: 100% !important;
+  min-height: 120px;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 15px;
+  margin-top: 10px;
+  resize: none;
+}
+
+/* 余白 */
+.cake-edit-wrapper .field {
+  margin-bottom: 20px;
+}
+
+/* 注意書き */
+.cake-edit-wrapper .field-note {
+  font-size: 13px;
+  margin-top: -5px;
+  margin-bottom: 20px;
+}
+
+/* ボタン中央揃え */
+.cake-edit-wrapper .actions {
+  text-align: center;
+  margin-top: 25px;
+}
+
+/* ボタン幅統一 */
+.cake-edit-wrapper .actions .btn {
+  width: 220px;
+}
+
+/* .edit-action-btns の中のボタンにのみ適用する */
+.edit-action-btns {
+  
+  .btn:first-child { 
+    margin-bottom: 15px; 
+  }
+
+}
+/*投稿画面の詳しく見るのところ*/
+.post-show-img {
+  width: 300px;   
+  height: auto;
+  display: block;
+  margin: 0 auto; 
+}
+
+.posts-title {
+  text-align: center;
+  margin: 20px 0;
+  font-weight: bold;
+  font-size: 24px;
+}

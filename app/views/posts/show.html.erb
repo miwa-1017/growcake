@@ -1,5 +1,77 @@
-<h1><%= @post.title %></h1>
-<p><%= @post.body %></p>
+<div class="post-show-wrapper">
 
-<%= link_to "編集", edit_post_path(@post) %> |
-<%= link_to "一覧に戻る", posts_path %>
+  <% if @post.exercise.present? %>
+    
+    <p class="exercise-text">
+      今日の運動：<strong><%= @post.exercise %></strong>
+    </p>
+  <% end %>
+  
+  <p class="post-meta">
+    👤 投稿者：<%= @post.user.is_deleted? ? "退会済みユーザー" : @post.user.name %><br>
+    📅 投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
+  </p>
+
+
+  <p class="post-body">
+    <%= simple_format(@post.body) %>
+  </p>
+
+    <% if @post.image.attached? %>
+      <div class="post-image">
+        <%= image_tag "cakes/#{@post.cake_type_at_post}_stage_#{format("%02d", @post.stage + 1)}.png",class: "post-show-img" %>
+      </div>
+    <% end %>
+
+
+  <% if @post.user == current_user %>
+    <%= link_to "編集 ", edit_post_path(@post), class: "btn" %>
+    <%= link_to "削除 ", @post, method: :delete, data: { confirm: "削除してもいい？" }, class: "btn danger" %>
+  <% end %>
+
+    <hr>
+
+  <h3>コメントを書く</h3>
+    <% if @comment && @comment.errors.any? %>
+      <p class="text-danger">コメントを入力してください。</p>
+    <% end %>
+    <% if user_signed_in? && current_user.email != "guest@example.com" %>
+      <%= form_with model: [@post, Comment.new], local: true do |f| %>
+        <%= f.text_area :content, placeholder: "コメントを書く...", rows: 2 %><br>
+        <%= f.submit "送信" %>
+  <% end %>
+    <% else %>
+        <p>※コメントするにはログインが必要です。</p>
+        <%= link_to "ログインする", new_user_session_path, class: "btn" %>
+    <% end %>
+    <hr>
+
+   <h3>コメント一覧</h3> 
+
+    <% @post.comments.each do |comment| %>
+      <% next unless comment.persisted? %>
+      <p>
+        <strong><%= comment.user.name %>：</strong>
+        <%= comment.content %>
+      </p>
+      <% if current_user == comment.user %>
+        <!-- 自分のコメント削除（一般ユーザー用ルート） -->
+        <%= link_to "削除", 
+                    post_comment_path(@post, comment), 
+                    method: :delete, 
+                    data: { confirm: "本当に削除しますか？" }, 
+                    class: "btn btn-danger" %>
+
+      <% elsif current_user&.admin? %>
+        <!-- 管理者による削除（adminルート） -->
+        <%= link_to "削除", 
+                    admin_comment_path(comment), 
+                    method: :delete, 
+                    data: { confirm: "本当に削除しますか？" }, 
+                    class: "btn btn-danger" %>
+      <% end %>
+    <% end %>
+  
+  <%= link_to "一覧に戻る", posts_path, class: "btn" %>
+
+</div>

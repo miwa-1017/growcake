@@ -1,17 +1,62 @@
-<h1>投稿一覧</h1>
+<div class="posts-wrapper">
 
-<%= link_to "新規投稿", new_post_path, class: "btn btn-primary" %>
+  <%= form_with url: search_posts_path, method: :get, local: true do %>
 
-<ul>
-  <% @posts.each do |post| %>
-    <li>
-      <%= post.title %>
-      │
-      <%= link_to "詳細", post_path(post) %>
-      │
-      <%= link_to "編集", edit_post_path(post) %>
-      │
-      <%= link_to "削除", post_path(post), method: :delete, data: { confirm: "本当に削除しますか？" } %>
-    </li>
+  <%= select_tag :exercise,
+        options_for_select([["運動(指定なし)", ""]] + exercise_options.to_a),
+        class: "form-select" %>
+
+  <%= select_tag :cake_type,
+        options_for_select([["ケーキタイプ(指定なし)", ""], ["ショートケーキ", "cake"], ["タルト", "tart"]]),
+        class: "form-select" %>
+
+  <%= select_tag :growth_status,
+        options_for_select([["成長ステージ(指定なし)", ""], ["最終ステージだけ", "finished"]]),
+        class: "form-select" %>
+
+    <!-- 検索ボタン -->
+    <%= submit_tag "検索", class: "btn" %>
+
   <% end %>
-</ul>
+
+    <h2 class="posts-title">みんなの投稿</h2>
+
+    <div class="posts-container">
+      <% @posts.each do |post| %>
+        <div class="post-card stage-<%= post.stage %>">
+        <p class="post-user-name">
+          <%= link_to post.user.name, user_path(post.user), class: "user-link" %>
+        </p>
+
+          <% if post.image.attached? %>
+            <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage + 1)}.png", class: "post-card-img" %>
+          <% else %>
+            <%= image_tag "cakes/cake_stage_01.png", class: "post-card-img default-img" %>
+          <% end %>
+
+          <div class="post-card-content">
+            <p class="post-exercise">
+              ✨ <%= post.exercise.present? ? post.exercise : "運動なし" %>
+            </p>
+            <p class="post-body"><%= truncate(post.body, length: 30) %></p>
+            <p class="post-date">📅 <%= post.created_at.strftime("%Y/%m/%d") %></p>
+          </div>
+
+          <% if post.comments.any? %>
+            <p class="comment-count">
+              💬 <%= post.comments.count %>件  
+              （最新：「<%= truncate(post.comments.last.content, length: 10) %>」）
+            </p>
+        <% else %>
+            <p class="comment-count">
+              💬 まだコメントはありません
+            </p>
+        <% end %>
+
+          <div class="post-card-actions">
+            <%= link_to "詳しく見る", post_path(post), class: "card-btn" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+</div>

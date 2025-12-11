@@ -1,0 +1,73 @@
+<div class="exercise-wrapper text-center">
+  <h2>ケーキの成長履歴</h2>
+  <p>ステージが上がったタイミングや、記念のコメントを残しておけます。</p>
+
+  <!-- 登録フォーム -->
+  <div class="growth-form mt-4">
+    <%= form_with model: @growth_record, url: growth_records_path, local: true do |f| %>
+      <div class="form-group">
+        <%= f.label :post_id, "元になったケーキ（投稿）" %><br>
+        <%= f.collection_select :post_id,
+            current_user.posts,
+            :id,
+            ->(post){ post.body.truncate(15) }, 
+            { prompt: "投稿を選択してください" },
+            { class: "form-control" } %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :stage, "ステージ" %><br>
+        <%= f.number_field :stage, class: "form-control", min: 1 %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :date, "日付" %><br>
+        <%= f.date_field :date, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :image, "このときのケーキ画像" %><br>
+        <%= f.file_field :image, accept: "image/*" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :comment, "コメント" %><br>
+        <%= f.text_area :comment, rows: 3, class: "form-control" %>
+      </div>
+
+      <div class="mt-3">
+        <%= f.submit "成長履歴を追加する", class: "btn mt-3" %>
+      </div>
+    <% end %>
+  </div>
+
+  <hr class="my-4">
+
+  <!-- 履歴一覧 -->
+  <div class="growth-records-list">
+    <% @growth_records.each do |record| %>
+      <div class="growth-card">
+        <p class="growth-date">📅 <%= record.date&.strftime("%Y/%m/%d") %></p>
+        <p class="growth-stage">🎉 Stage <%= record.stage %></p>
+        <p class="growth-post">
+          元のケーキ：
+          <%= link_to record.post.title, post_path(record.post) %> <!-- title カラム名注意 -->
+        </p>
+
+        <% if record.image.attached? %>
+          <div class="growth-image">
+            <%= image_tag record.image.variant(resize_to_limit: [400, 400]) %>
+          </div>
+        <% end %>
+
+        <% if record.comment.present? %>
+          <p class="growth-comment">コメント：<%= record.comment %></p>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @growth_records.empty? %>
+      <p>まだ成長履歴がありません。ステージが上がったタイミングで記録してみてね。</p>
+    <% end %>
+  </div>
+</div>

@@ -2,9 +2,20 @@ ja:
   enums:
     exercise_log:
       category:
+        cardio: "有酸素"
+        running: "ランニング"
         strength: "筋トレ"
-        cardio: "有酸素運動"
         stretch: "ストレッチ"
+        walking: "ウォーキング"
+        yoga: "ヨガ"
+        dance: "ダンス"
+        pilates: "ピラティス"
+        ems: "EMS"
+    user:
+      cake_type:
+        unset: "未選択"
+        tart: "タルト"
+        cake: "ショートケーキ"
 
   activerecord:
     attributes:
