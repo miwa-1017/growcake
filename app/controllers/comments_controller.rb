@@ -4,11 +4,11 @@ class CommentsController < ApplicationController
     # comments_controller.rb
   def create
     @post = Post.find(params[:post_id])
-    @comment = @post.comments.build(comment_params) 
+    @comment = @post.comments.build(comment_params)
     @comment.user = current_user
 
     if @comment.save
-      # ... 成功時の処理
+      redirect_to post_path(@post), notice: "コメントを投稿しました"
     else
       flash.now[:alert] = "コメントを入力してください"
       @comments = @post.comments.includes(:user)

@@ -49,24 +49,32 @@ class PostsController < ApplicationController
       @post.exercise = nil
     end
 
-    if @post.save
-      # ▼ 成長履歴自動保存 ▼
-      before_stage = current_user.current_stage
-      current_user.growth_logs.create(growth_point: 1)
-      after_stage = current_user.current_stage
+    # 検索用カテゴリの保存
+    if today_logs.present?
+      @post.search_categories = today_logs.map(&:category)
+    else
+      @post.search_categories = []
+    end
 
-      # 画像の表示と合わせるため +1 した値を保存
-      display_stage = after_stage + 1  
+   if @post.save
+    before_stage = current_user.current_stage
 
-      comment = after_stage != before_stage ? "🎉 ステージアップ！" : "🍰 今日の投稿！"
+    # 成長ポイント付与
+    current_user.growth_logs.create(growth_point: 1)
 
-      GrowthRecord.create!(
-        user: current_user,
-        post: @post,
-        stage: display_stage,
-        date: Date.today,
-        comment: comment
-      )
+    after_stage = current_user.current_stage
+
+    # コメント分岐
+    comment = after_stage != before_stage ? "🎉 ステージアップ！" : "🍰 今日の投稿！"
+
+    # 正しいステージを保存（+1 はしない！）
+    GrowthRecord.create!(
+      user: current_user,
+      post: @post,
+      stage: after_stage,
+      date: Date.today,
+      comment: comment
+    )
 
       redirect_to @post, notice: "投稿しました🍰"
     else
@@ -91,7 +99,7 @@ class PostsController < ApplicationController
     @posts = Post.all
 
     if params[:exercise].present?
-      @posts = @posts.where("exercise LIKE ?", "#{params[:exercise]}%")
+      @posts = @posts.where("search_categories LIKE ?", "%- #{params[:exercise]}%")
     end
 
     if params[:cake_type].present?
