@@ -13,7 +13,7 @@ class GrowthRecordsController < ApplicationController
 
   def create
     @growth_record = current_user.growth_records.new(growth_record_params)
-
+    @growth_record.cake_type_at_post = current_user.cake_type
     if @growth_record.save
       redirect_to growth_records_path, notice: "成長履歴を登録しました。"
     else
@@ -31,7 +31,8 @@ class GrowthRecordsController < ApplicationController
       :stage,
       :date,
       :comment,
-      :image
+      :image,
+      :cake_type_at_post 
     )
   end
 end
