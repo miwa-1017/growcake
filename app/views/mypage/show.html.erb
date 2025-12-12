@@ -35,15 +35,16 @@
     <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
 
     <div class="mypage-actions">
-      <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn" %>
-      <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn btn-outline" %>
-      <%= link_to "ケーキの成長履歴を見る", growth_records_path, class: "btn" %>
 
       <% if current_user.growth_logs.exists? %>
-        <%= link_to "ケーキを育てる<br>投稿する".html_safe, growth_path, class: "btn btn-outline" %>
+        <%= link_to "ケーキを育てる<br>投稿する".html_safe, growth_path, class: "btn" %>
       <% else %>
-        <%= link_to "ケーキを育てる", growth_path, class: "btn btn-outline" %>
+        <%= link_to "ケーキを育てる", growth_path, class: "btn" %>
       <% end %>
+      <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn btn-outline" %>
+      <%= link_to "ケーキの成長履歴を見る", growth_records_path, class: "btn" %>
+      <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn btn-outline" %>
+
 
       <div class="back-btn mt-4">
         <%= link_to "戻る", request.referer || root_path, class: "btn" %>

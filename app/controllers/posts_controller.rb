@@ -72,6 +72,7 @@ class PostsController < ApplicationController
       user: current_user,
       post: @post,
       stage: after_stage,
+      cake_type_at_post: current_user.cake_type, 
       date: Date.today,
       comment: comment
     )
