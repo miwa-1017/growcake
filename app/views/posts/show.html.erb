@@ -19,7 +19,7 @@
 
     <% if @post.image.attached? %>
       <div class="post-image">
-        <%= image_tag "cakes/#{@post.cake_type_at_post}_stage_#{format("%02d", @post.stage + 1)}.png",class: "post-show-img" %>
+        <%= image_tag "cakes/#{@post.cake_type_at_post}_stage_#{format("%02d", @post.stage)}.png",class: "post-show-img" %>
       </div>
     <% end %>
 

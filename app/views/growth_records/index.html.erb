@@ -10,7 +10,7 @@
 <% if @growth_records.any? %>
   <% @growth_records.order(date: :desc).each do |record| %>
     <div class="history-card">
-      <p class="date">📅 <%= record.date %></p>
+      <p class="date">📅 <%= record.created_at.strftime("%Y-%m-%d %H:%M") %></p>
 
       <p class="stage">🍰 Stage <%= record.stage %> 到達！</p>
 

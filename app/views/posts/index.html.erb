@@ -2,8 +2,20 @@
 
   <%= form_with url: search_posts_path, method: :get, local: true do %>
 
+  <% exercise_options = {
+    "有酸素" => "cardio",
+    "ランニング" => "running",
+    "筋トレ" => "strength",
+    "ストレッチ" => "stretch",
+    "ウォーキング" => "walking",
+    "ヨガ" => "yoga",
+    "ダンス" => "dance",
+    "ピラティス" => "pilates",
+    "EMS" => "ems"
+    } %>
+
   <%= select_tag :exercise,
-        options_for_select([["運動(指定なし)", ""]] + exercise_options.to_a),
+        options_for_select([["運動（指定なし）", ""]] + exercise_options.map { |jp, en| [jp, en] }),
         class: "form-select" %>
 
   <%= select_tag :cake_type,
@@ -29,7 +41,7 @@
         </p>
 
           <% if post.image.attached? %>
-            <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage + 1)}.png", class: "post-card-img" %>
+            <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage)}.png", class: "post-card-img" %>
           <% else %>
             <%= image_tag "cakes/cake_stage_01.png", class: "post-card-img default-img" %>
           <% end %>

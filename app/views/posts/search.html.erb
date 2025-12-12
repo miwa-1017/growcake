@@ -4,14 +4,7 @@
   <p>カテゴリーを選んでください👇</p>
 
   <%= form_with url: search_posts_path, method: :get, local: true do %>
-    <%= select_tag :category, options_for_select([
-      ['有酸素運動', 'aerobic'],
-      ['筋トレ', 'strength'],
-      ['ヨガ', 'yoga'],
-      ['ウォーキング', 'walking'],
-      ['ストレッチ', 'stretch'],
-      ['休息🛌', 'rest']
-    ]) %>
+   
 
     <%= submit_tag "検索する", class: "button" %>
   <% end %>

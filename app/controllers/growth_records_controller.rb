@@ -8,7 +8,7 @@ class GrowthRecordsController < ApplicationController
       @user = current_user
     end
 
-    @growth_records = @user.growth_records.includes(:post).order(date: :desc)
+    @growth_records = @user.growth_records.includes(:post).order(created_at: :desc)
   end
 
   def create

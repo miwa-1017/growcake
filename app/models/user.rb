@@ -23,8 +23,8 @@ class User < ApplicationRecord
   enum cake_type: { unset: 0, tart: 1, cake: 2 }
 
    GROWTH_STAGES = {
-    tart:     [0, 10, 20, 30, 40, 50, 60, 70, 80],    
-    cake: [0, 10, 20, 30, 40, 50, 60, 70, 80] 
+    tart: [10, 20, 30, 40, 50, 60, 70, 80, 90],    
+    cake: [10, 20, 30, 40, 50, 60, 70, 80, 90] 
   }
 
   # 現在の合計ポイント
@@ -63,7 +63,7 @@ class User < ApplicationRecord
       end
 
     # current_stage は 0〜8 なので、画像名 01〜09 に合わせる
-    stage_no  = current_stage + 1          # 1〜9
+    stage_no  = current_stage         # 1〜9
     stage_str = format("%02d", stage_no)   # "01"〜"09"
 
     "cakes/#{prefix}_stage_#{stage_str}.png"
