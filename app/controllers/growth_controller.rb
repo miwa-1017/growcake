@@ -4,11 +4,8 @@ class GrowthController < ApplicationController
 
   def show
     @user = current_user
-    stages = User::GROWTH_STAGES[@user.cake_type.to_sym]
     @total_points = @user.total_growth_point
-
-    # 成長段階を決めるロジック
-    @stage = stages.index { |point| @total_points <= point } || stages.length - 1
+    @stage = @user.current_stage   # ← これだけにする！
   end
 
   private

@@ -5,7 +5,7 @@
 
   <% if @user.cake_type != "unset" %>
     <% cake_type = @user.cake_type %>
-    <% stage_number = @stage + 1 %>
+    <% stage_number = @stage %>
       <% prefix =
         case @user.cake_type
         when "tarte" then "tart"
@@ -16,12 +16,12 @@
         <div class="cake-frame-background <%= @user.cake_type %>"></div>
         <%= image_tag "cakes/cake_frame.png", class: "cake-frame" %>
         <% prefix = (@user.cake_type == "tart" ? "tart" : "cake") %>
-        <% stage_number = @stage + 1 %>
-
-        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', stage_number)}.png", class: "cake-image" %>
+        <% stage_number = @stage %>
+        <% display_stage = @stage %>
+        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', display_stage)}.png",  class: "cake-image"  %>
       </div>
 
-    <p>成長段階: <%= @stage + 1 %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %></p>
+    <p>成長段階: <%= @stage %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %></p>
       <% else %>
         <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
       <% end %>
