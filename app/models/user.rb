@@ -33,21 +33,21 @@ class User < ApplicationRecord
   end
 
   # 現在の成長段階
-  def current_stage
+ def current_stage
     return 0 if cake_type == "unset" # 未選択時
 
     stages = GROWTH_STAGES[cake_type.to_sym]
 
-    stages.each_with_index do |threshold, index|
-      return index if total_growth_point < threshold
-    end
-
-    stages.size - 1 # 最終ステージ
+    # 何個のしきい値を「超えているか」でステージを決定
+    # 0〜9 の整数が返る
+    stages.count { |threshold| total_growth_point >= threshold }
   end
 
   def growth_finished?
     return false if cake_type == "unset"
-    current_stage == GROWTH_STAGES[cake_type&.to_sym].length - 1
+
+    # ステージ9が最後（配列の長さ = 9）
+    current_stage == GROWTH_STAGES[cake_type.to_sym].size
   end
 
   def cake_image_for_display

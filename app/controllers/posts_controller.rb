@@ -61,13 +61,13 @@ class PostsController < ApplicationController
 
     # 成長ポイント付与
     current_user.growth_logs.create(growth_point: 1)
-
     after_stage = current_user.current_stage
+
+    @post.stage = after_stage
 
     # コメント分岐
     comment = after_stage != before_stage ? "🎉 ステージアップ！" : "🍰 今日の投稿！"
 
-    # 正しいステージを保存（+1 はしない！）
     GrowthRecord.create!(
       user: current_user,
       post: @post,
