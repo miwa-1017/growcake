@@ -15,7 +15,7 @@
       <p class="stage">🍰 Stage <%= record.stage %> 到達！</p>
 
       <!-- ステージ画像表示 -->
-      <%= image_tag "cakes/#{record.post.cake_type_at_post}_stage_#{format('%02d', record.stage)}.png", class: "history-img" %>
+      <%= image_tag "cakes/#{record.cake_type_at_post}_stage_#{format('%02d', record.stage)}.png",class: "history-img" %>
 
       <% if record.comment.present? %>
         <p class="comment">💬 <%= record.comment %></p>
