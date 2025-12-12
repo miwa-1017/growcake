@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2025_12_12_034451) do
+ActiveRecord::Schema.define(version: 2025_12_12_071105) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,7 @@ ActiveRecord::Schema.define(version: 2025_12_12_034451) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "comment"
+    t.string "cake_type_at_post"
     t.index ["post_id"], name: "index_growth_records_on_post_id"
     t.index ["user_id"], name: "index_growth_records_on_user_id"
   end

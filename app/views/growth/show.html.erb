@@ -3,25 +3,33 @@
 
   <p>現在の総成長ポイント：<%= @total_points %> pt</p>
 
-  <% if @user.cake_type != "unset" %>
-    <% cake_type = @user.cake_type %>
-    <% stage_number = @stage %>
-      <% prefix =
-        case @user.cake_type
-        when "tarte" then "tart"
-        when "shortcake" then "cake"
-        else "cake"
-        end %>
-      <div class="cake-display">
-        <div class="cake-frame-background <%= @user.cake_type %>"></div>
-        <%= image_tag "cakes/cake_frame.png", class: "cake-frame" %>
-        <% prefix = (@user.cake_type == "tart" ? "tart" : "cake") %>
-        <% stage_number = @stage %>
-        <% display_stage = @stage %>
-        <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', display_stage)}.png",  class: "cake-image"  %>
-      </div>
+      <% if @user.cake_type != "unset" %>
+        <% cake_type = @user.cake_type %>
+        <% current_stage = @stage %> 
 
-    <p>成長段階: <%= @stage %> / <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %></p>
+        <% prefix =
+          case @user.cake_type
+          when "tart" then "tart"
+          when "cake" then "cake"
+          else "cake"
+          end
+        %>
+
+        <div class="cake-display">
+          <div class="cake-frame-background <%= @user.cake_type %>"></div>
+
+          <!-- フレーム画像 -->
+          <%= image_tag "cakes/cake_frame.png", class: "cake-frame" %>
+
+          <!-- ケーキ本体の画像（current_stage をそのまま使う） -->
+          <%= image_tag "cakes/#{prefix}_stage_#{sprintf('%02d', current_stage)}.png",
+                        class: "cake-image" %>
+        </div>
+
+        <p>
+          成長段階: <%= current_stage %> /
+          <%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %>
+        </p>
       <% else %>
         <p>ケーキタイプが未設定です<br>マイページで選択してください。</p>
       <% end %>
@@ -31,20 +39,20 @@
         <%= link_to "ケーキの成長履歴を見る🍰", growth_records_path, class: "btn growth-btn" %>
       </div>
 
-      <% final_stage = User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>
+      <% final_stage = User::GROWTH_STAGES[@user.cake_type.to_sym].length %>
 
       <% if @stage == final_stage %>
         <div class="congrats-message">
-        🎉✨ おめでとう！ ✨🍰<br>
-        <p>ここまで続けてきたあなたの努力、とっても素敵だよ。</p>
-        <p>今日の積み重ねが、未来のあなたを作る。</p>
-        <p>これからも、焦らず自分のペースでね。</p>
+          🎉✨ おめでとう！ ✨🎉<br>
+          ここまで続けてきたあなたの努力、とっても素敵だよ。<br>
+          今日の積み重ねが、未来のあなたを作る。<br>
+          これからも、焦らず自分のペースでね。
         </div>
       <% end %>
       
       <div id="confetti"
         data-stage="<%= @stage %>"
-        data-max="<%= User::GROWTH_STAGES[@user.cake_type.to_sym].length - 1 %>">
+        data-max="<%= User::GROWTH_STAGES[@user.cake_type.to_sym].length %>">
       </div>
 
     <div class="back-btn mt-4">
