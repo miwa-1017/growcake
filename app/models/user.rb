@@ -15,7 +15,7 @@ class User < ApplicationRecord
   validates :name, presence: true, unless: :guest?
 
   def active_for_authentication?
-    super && !is_deleted && !is_banned
+    super #&& !is_deleted && !is_banned
   end
 
   def email_required?
