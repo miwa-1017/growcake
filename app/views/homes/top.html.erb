@@ -21,6 +21,10 @@
           <% if user_signed_in? && !guest_user? %>
             <%= link_to "マイページ", mypage_path, class: "btn me-2" %>
 
+            <% if current_user.admin? %>
+              <%= link_to "ユーザー管理", admin_users_path, class: "btn me-2" %>
+            <% end %>
+
           <% elsif user_signed_in? && guest_user? %>
             <%= link_to "投稿一覧を見る", posts_path, class: "btn me-2" %>
 
