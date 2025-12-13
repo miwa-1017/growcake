@@ -42,3 +42,11 @@
   color: #777;
   font-size: 14px;
 }
+
+.like-btn {
+  border-radius: 12px;
+}
+
+.like-btn.liked {
+  background: #f4b6c2;
+}

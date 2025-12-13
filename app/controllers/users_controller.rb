@@ -31,6 +31,16 @@ class UsersController < ApplicationController
     redirect_to root_path, notice: "退会処理が完了しました。またいつでも戻ってきてね "
   end
 
+  def following
+    @user = User.find(params[:id])
+    @users = @user.following
+  end
+
+  def followers
+    @user = User.find(params[:id])
+    @users = @user.followers
+  end
+
   private
 
   def admin_only
