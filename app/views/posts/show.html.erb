@@ -1,4 +1,4 @@
-<div class="post-show-wrapper">
+<div class="post-show-wrapper stage-<%= @post.stage %>">
 
   <% if @post.exercise.present? %>
     
@@ -8,7 +8,7 @@
   <% end %>
   
   <p class="post-meta">
-    👤 投稿者：<%= @post.user.is_deleted? ? "退会済みユーザー" : @post.user.name %><br>
+    👤 投稿者：<% @post.user.name %><br>
     📅 投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
   </p>
 
@@ -23,11 +23,31 @@
       </div>
     <% end %>
 
+    <div class="post-actions">
+      <% if user_signed_in? %>
+        <div class="like-area">
+          <% if current_user.liked?(@post) %>
+            <%= button_to "いいね解除❤️ #{@post.likes.count}",
+                post_like_path(@post),
+                method: :delete,
+                class: "btn like-btn liked" %>
+          <% else %>
+            <%= button_to "いいね🤍 #{@post.likes.count}",
+                post_like_path(@post),
+                method: :post,
+                class: "btn like-btn" %>
+          <% end %>
+        </div>
+      <% end %>
 
-  <% if @post.user == current_user %>
-    <%= link_to "編集 ", edit_post_path(@post), class: "btn" %>
-    <%= link_to "削除 ", @post, method: :delete, data: { confirm: "削除してもいい？" }, class: "btn danger" %>
-  <% end %>
+      <% if @post.user == current_user %>
+        <%= link_to "編集", edit_post_path(@post), class: "btn" %>
+        <%= link_to "削除", @post,
+            method: :delete,
+            data: { confirm: "削除してもいい？" },
+            class: "btn btn-danger" %>
+      <% end %>
+    </div>
 
     <hr>
 

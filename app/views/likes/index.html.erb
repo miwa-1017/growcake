@@ -1,0 +1,15 @@
+<div class="likes-wrapper">
+  <h1 class="likes-title">いいね一覧</h1>
+
+  <% if @likes.any? %>
+    <ul class="likes-list">
+      <% @likes.each do |like| %>
+        <li class="likes-item">
+          <%= link_to like.post.title, post_path(like.post), class: "likes-link" %>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p class="likes-empty">まだいいねした投稿はありません</p>
+  <% end %>
+</div>

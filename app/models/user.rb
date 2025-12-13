@@ -6,6 +6,8 @@ class User < ApplicationRecord
   has_many :growth_logs, dependent: :destroy
   has_many :comments
   has_many :growth_records
+  has_many :likes, dependent: :destroy
+  has_many :liked_posts, through: :likes, source: :post
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
@@ -13,7 +15,7 @@ class User < ApplicationRecord
   validates :name, presence: true, unless: :guest?
 
   def active_for_authentication?
-    super && !is_deleted && !is_banned
+    super #&& !is_deleted && !is_banned
   end
 
   def email_required?
@@ -82,6 +84,10 @@ class User < ApplicationRecord
 
   def admin?
     self.admin == true
+  end
+
+  def liked?(post)
+  likes.exists?(post_id: post.id)
   end
 
 end
