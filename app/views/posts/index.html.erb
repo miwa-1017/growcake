@@ -66,6 +66,20 @@
             </p>
         <% end %>
 
+          <% if current_user.liked?(post) %>
+            <%= link_to post_like_path(post),
+                  method: :delete,
+                  class: "like-link liked" do %>
+              いいね解除❤️ <%= post.likes.count %>
+            <% end %>
+          <% else %>
+            <%= link_to post_like_path(post),
+                  method: :post,
+                  class: "like-link" do %>
+              いいね🤍 <%= post.likes.count %>
+            <% end %>
+          <% end %>
+
           <div class="post-card-actions">
             <%= link_to "詳しく見る", post_path(post), class: "card-btn" %>
           </div>

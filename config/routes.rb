@@ -31,7 +31,9 @@ Rails.application.routes.draw do
       get :search
     end
     resources :comments, only: [:create, :destroy]
+    resource :like, only: [:create, :destroy]
   end
+  resources :likes, only: [:index]
   resources :exercise_logs, only: [:index, :new, :create]
   resources :growth_logs, only: [ :create]
   get '/growth', to: 'growth#show', as: :growth
@@ -50,8 +52,7 @@ Rails.application.routes.draw do
         patch :ban
         patch :unban
       end
-    end
-    
+    end 
     resources :comments, only: [:destroy]
   end
 end

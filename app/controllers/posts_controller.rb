@@ -100,7 +100,7 @@ class PostsController < ApplicationController
     @posts = Post.all
 
     if params[:exercise].present?
-      @posts = @posts.where("search_categories LIKE ?", "%- #{params[:exercise]}%")
+      @posts = @posts.where("search_categories LIKE ?", "%#{params[:exercise]}%")
     end
 
     if params[:cake_type].present?
@@ -108,7 +108,7 @@ class PostsController < ApplicationController
     end
 
     if params[:growth_status] == "finished"
-      @posts = @posts.select { |post| post.user.growth_finished? }
+      @posts = @posts.where(stage: 9)
     end
 
     render :index
