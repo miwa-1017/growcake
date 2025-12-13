@@ -3,7 +3,8 @@
   <h2><%= @user.name %> さんのページ</h2>
   <p>メールアドレス：非公開</p>
 
- 
+  <%= link_to "フォロー中", following_user_path(@user), class: "btn mt-3" %>
+  <%= link_to "フォロワー", followers_user_path(@user), class: "btn mt-3" %>
 
   <div class="mypage-actions mt-4">
     <%= link_to "このユーザーの成長のあしあとを見る", growth_records_path(user_id: @user.id), class: "btn" %>

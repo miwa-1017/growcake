@@ -1,0 +1,13 @@
+<div class="users-wrapper">
+  <h2><%= @user.name %> をフォローしているユーザー</h2>
+
+  <% if @users.any? %>
+    <% @users.each do |user| %>
+      <%= render "users/user_card", user: user %>
+    <% end %>
+  <% else %>
+    <p class="empty-message">
+      まだ誰もフォローしていません
+    </p>
+  <% end %>
+</div>

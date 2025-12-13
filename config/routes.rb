@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :index, :destroy] do
     member do
+      get :following
+      get :followers
       patch :withdraw
     end
   end
@@ -34,6 +36,7 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy]
   end
   resources :likes, only: [:index]
+  resources :relationships, only: [:create, :destroy]
   resources :exercise_logs, only: [:index, :new, :create]
   resources :growth_logs, only: [ :create]
   get '/growth', to: 'growth#show', as: :growth

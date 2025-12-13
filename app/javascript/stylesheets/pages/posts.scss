@@ -24,12 +24,13 @@
   max-width: 420px;
   margin: 40px auto;
   padding: 24px;
-
   background: #fff;
   border-radius: 20px;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 /* 4. その他共通のスタイル (編集/詳細ページ内の要素) */
@@ -182,12 +183,6 @@
   gap: 12px;
   justify-content: center;
   margin-top: 20px;
+  margin: 10px;
 }
 
-.like-btn {
-  border-radius: 12px;
-}
-
-.like-btn.liked {
-  background: #f4b6c2;
-}

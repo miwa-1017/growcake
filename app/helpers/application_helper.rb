@@ -20,4 +20,8 @@ module ApplicationHelper
       "EMS" => "ems"
     }
   end
+
+  def viewing_own_page?(user)
+    user == current_user
+  end
 end
