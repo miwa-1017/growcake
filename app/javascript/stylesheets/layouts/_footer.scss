@@ -1,0 +1,32 @@
+.site-footer {
+  margin-top: 80px;
+  background-color: #c2a676; // 薄ベージュ（焼き菓子系）
+  text-align: center;
+  padding-bottom: 24px;
+}
+
+.footer-divider {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.footer-divider img {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 240%;
+  max-width: 3000px;
+  max-height: 90px;
+  object-fit: contain;
+  display: block;
+}
+
+.footer-inner {
+  font-size: 0.85rem;
+  color: #8B6A3E; // キャラメルブラウン
+}
+
+.footer-text {
+  margin: 0;
+}

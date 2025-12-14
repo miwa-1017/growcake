@@ -66,7 +66,9 @@
             </p>
         <% end %>
 
-          <%= render "likes/like_button", post: post %>
+          <div id="like_button_<%= post.id %>">
+            <%= render "likes/like_button", post: post %>
+          </div>
 
           <div class="post-card-actions">
             <%= link_to "詳しく見る", post_path(post), class: "card-btn" %>

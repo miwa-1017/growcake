@@ -16,7 +16,7 @@
 }
 
 .likes-item {
-  background: #c78f78;
+  background: #e2c6b2;
   border-radius: 12px;
   padding: 16px;
   margin-bottom: 16px;
@@ -25,7 +25,7 @@
 .likes-link {
   display: inline-block;
   padding: 6px 12px;
-  background-color: #D26A54;
+  background-color: #cc7f3b;
   border-radius: 8px;
   text-decoration: none;
   color: #333;
@@ -48,5 +48,13 @@
 }
 
 .like-btn.liked {
-  background: #f4b6c2;
+  background: transparent;
+  border: 1px solid #e6cdd2;
+  color: #a8707a;
+}
+
+.likes-unlike-btn {
+ background-color: #bb8d5f!important;
+ color: #8f6a73;
+ font-size: 0.9rem;
 }
