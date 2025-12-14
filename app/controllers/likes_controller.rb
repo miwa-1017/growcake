@@ -3,8 +3,12 @@ class LikesController < ApplicationController
   before_action :reject_guest, only: [:index]
 
   def create
-    current_user.likes.find_or_create_by(post_id: params[:post_id])
-    redirect_back(fallback_location: root_path)
+    @post = Post.find(params[:post_id])
+    current_user.likes.find_or_create_by(post: @post)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def index
@@ -12,9 +16,13 @@ class LikesController < ApplicationController
   end
 
   def destroy
-    like = current_user.likes.find_by(post_id: params[:post_id])
+    @post = Post.find(params[:post_id])
+    like = current_user.likes.find_by(post: @post)
     like.destroy if like
-    redirect_back(fallback_location: root_path)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   private

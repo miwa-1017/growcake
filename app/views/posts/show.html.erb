@@ -24,20 +24,13 @@
     <% end %>
 
       <div class="post-actions">
-        <%= render 'likes/like_button', post: @post %>
+        <div id="like_button_<%= @post.id %>">
+          <%= render "likes/like_button", post: @post %>
+        </div>
 
-        <% if user_signed_in? && current_user != @post.user %>
-          <% if current_user.following?(@post.user) %>
-            <% relationship = current_user.active_relationships.find_by(followed_id: @post.user.id) %>
-            <%= button_to "フォロー解除",
-                relationship_path(relationship),
-                method: :delete %>
-          <% else %>
-            <%= button_to "フォロー",
-                relationships_path(followed_id: @post.user.id),
-                method: :post %>
-          <% end %>
-        <% end %>
+        <div id="follow_button_<%= @post.user.id %>">
+          <%= render "relationships/follow_button", user: @post.user %>
+        </div>
               
 
         <% if @post.user == current_user %>
