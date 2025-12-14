@@ -1,0 +1,28 @@
+<div class="notifications-wrapper">
+  <h2>通知</h2>
+
+  <% if @notifications.any? %>
+
+    <% @notifications.each do |notification| %>
+      <%= link_to notification_path(notification), class: "notification-link" do %>
+        <div class="notification <%= 'unread' unless notification.read %>">
+
+          <p class="message">
+            <%= notification.message %>
+          </p>
+
+          <span class="time">
+            <%= l(notification.created_at, format: :short) %>
+          </span>
+
+        </div>
+      <% end %>
+    <% end %>
+
+  <% else %>
+  <div class="empty-notification">
+    <%= image_tag "notifications/empty.png", alt: "通知はまだありません" %>
+    <p>いいねや反応が届くと、ここに表示されます🍰</p>
+  </div>
+  <% end %>
+</div>
