@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'notifications/index'
   get 'growth_records/index'
   #マイページ(一般ユーザー用)
   #get 'cake_types/edit'
@@ -46,6 +47,7 @@ Rails.application.routes.draw do
     delete :withdraw, to:"users#withdraw"
   end
   resources :growth_records, only:[:index, :create]
+  resources :notifications, only: [:index, :show]
 
   #====管理者用==========
     namespace :admin do

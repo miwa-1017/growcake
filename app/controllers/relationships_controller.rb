@@ -3,7 +3,16 @@ class RelationshipsController < ApplicationController
 
   def create
     @user = User.find(params[:followed_id])
-    current_user.follow(@user)
+
+    @relationship = current_user.follow(@user)
+
+    
+    if @relationship.persisted?
+      Notification.create(
+        user: @relationship.followed,   # フォローされた人
+        notifiable: @relationship
+      )
+    end
 
     respond_to do |format|
       format.js

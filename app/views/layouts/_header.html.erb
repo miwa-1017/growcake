@@ -1,0 +1,66 @@
+<header class="site-header px-4 py-3">
+
+  <% if user_signed_in? %>
+    <div class="search-area d-flex mb-2">
+      <%= form_with url: users_path, method: :get, local: true, class: "d-flex" do |f| %>
+        <%= f.text_field :keyword, placeholder: "ユーザー名で検索", class: "form-control me-2" %>
+        <%= f.submit "🔍", class: "search-button" %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="d-flex justify-content-between align-items-center">
+
+    <!-- ロゴ -->
+    <div class="header-logo">
+      <%= link_to root_path do %>
+        <%= image_tag "growcake_logo.png", class: "logo-img" %>
+      <% end %>
+    </div>
+
+    <!-- ナビゲーション -->
+    <nav class="header-nav d-flex align-items-center">
+
+      <% if user_signed_in? %>
+        <span class="welcome-text me-4">
+          ようこそ、
+          <%= current_user.guest? ? "ゲストさん" : "#{current_user.name} さん" %>
+        </span>
+      <% end %>
+
+      <%= link_to "About", about_path, class: "nav-link me-3" %>
+
+      <% if user_signed_in? %>
+        <%= link_to "投稿一覧", posts_path, class: "nav-link me-3" %>
+
+        <% unless current_user.guest? %>
+          <%= link_to notifications_path,
+              class: "notification-bell me-3 #{'has-unread' if current_user.notifications.unread.any?}" do %>
+            <i class="fa-regular fa-bell"></i>
+
+            <% unread_count = current_user.notifications.unread.count %>
+            <% if unread_count > 0 %>
+              <span class="notification-badge">
+                <%= unread_count > 9 ? "9+" : unread_count %>
+              </span>
+            <% end %>
+          <% end %>
+
+          <%= link_to "いいね一覧", likes_path, class: "nav-link me-3" %>
+          <%= link_to "マイページ", mypage_path, class: "nav-link me-3" %>
+        <% end %>
+
+        <%= link_to "ログアウト",
+            destroy_user_session_path,
+            method: :delete,
+            class: "nav-link me-3" %>
+
+      <% else %>
+        <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "nav-link me-3" %>
+        <%= link_to "ログイン", new_user_session_path, class: "nav-link me-3" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "nav-link me-3" %>
+      <% end %>
+
+    </nav>
+  </div>
+</header>

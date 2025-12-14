@@ -8,6 +8,12 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
+      if @post.user != current_user
+        Notification.create(
+            user: @post.user,
+            notifiable: @comment
+           )
+      end
       redirect_to post_path(@post), notice: "コメントを投稿しました"
     else
       flash.now[:alert] = "コメントを入力してください"
