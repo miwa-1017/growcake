@@ -43,18 +43,44 @@
   font-size: 14px;
 }
 
+
 .like-btn {
-  border-radius: 12px;
+  background: none;
+  border: none;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
 }
 
-.like-btn.liked {
-  background: transparent;
-  border: 1px solid #e6cdd2;
-  color: #a8707a;
+.like-icon {
+  display: block;
+  margin-left: 5px;
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+  transition: transform 0.15s ease;
 }
 
-.likes-unlike-btn {
- background-color: #bb8d5f!important;
- color: #8f6a73;
- font-size: 0.9rem;
+.like-icon:hover {
+  transform: scale(1.1);
+}
+
+
+.like-text {
+  font-size: 15px;
+  color: #bfa58a; /* ベージュ系 */
+  margin: 0 4px;
+}
+
+.like-count {
+  font-size: 12px;
+  color: #7a6a58;
+}
+.like-area {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
 }

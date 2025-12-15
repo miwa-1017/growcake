@@ -12,7 +12,7 @@
           </p>
 
           <span class="time">
-            <%= l(notification.created_at, format: :short) %>
+            <%= time_ago_in_words(notification.created_at).sub("約","") %>前
           </span>
 
         </div>

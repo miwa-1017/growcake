@@ -186,3 +186,10 @@
   margin: 10px;
 }
 
+.like-btn,
+.follow-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap; // ← 文字折り返し防止
+}
