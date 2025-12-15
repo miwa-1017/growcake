@@ -1,17 +1,23 @@
 <% if user_signed_in? && current_user != post.user %>
-        <div class="like-area">
-          <% if current_user.liked?(post) %>
-            <%= button_to "いいね解除💔 #{post.likes.count}",
-                post_like_path(post),
-                method: :delete,
-                remote: true,
-                class: "btn like-btn liked" %>
-          <% else %>
-            <%= button_to "いいね❤️ #{post.likes.count}",
-                post_like_path(post),
-                method: :post,
-                remote: true,
-                class: "btn like-btn" %>
-          <% end %>
-        </div>
+  <div class="like-area">
+    <% if current_user.liked?(post) %>
+      <%= button_to post_like_path(post),
+          method: :delete,
+          remote: true,
+          class: "btn like-btn liked" do %>
+        <%= image_tag "heart_active.png", alt: "いいね解除", class: "like-icon" %>
+        <span class="like-text">解除</span>
+        <span class="like-count"><%= post.likes.count %></span>
       <% end %>
+    <% else %>
+      <%= button_to post_like_path(post),
+          method: :post,
+          remote: true,
+          class: "btn like-btn" do %>
+        <%= image_tag "heart_default.png", alt: "いいね", class: "like-icon" %>
+        <span class="like-text">いいね</span>
+        <span class="like-count"><%= post.likes.count %></span>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

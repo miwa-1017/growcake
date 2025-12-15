@@ -91,7 +91,9 @@
 }
 
 .notification-bell:hover {
-  opacity: 1;
+  background-color: transparent;
+  transform: translateY(-1px);
+  transition: transform 0.15s ease;
 }
 
 /* 未読あり */
@@ -114,7 +116,21 @@
 .notification-bell {
   position: relative;
   font-size: 1.1rem;
-  color: #8b7d6b;
+  color: #b7d6b;
+
+  /* button対策 */
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.notification-bell:focus {
+  outline: none;
 }
 
 .notification-bell.has-unread {
@@ -138,4 +154,54 @@
   text-align: center;
 
   border-radius: 999px;
+}
+
+/* ヘッダー通知ドロップダウン */
+.notification-dropdown {
+  position: absolute;
+  top: 40px; // ベルの下に出したいなら40pxが◎
+  right: 0;
+  transform: translateX(-150px);
+  width: 320px;
+  background: #fffdf8;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  padding: 12px;
+  display: none;
+  z-index: 100;
+}
+
+.notification-dropdown.is-open {
+  display: block;
+}
+
+/* 通知アイテム */
+.notification-item {
+  padding: 8px 10px;
+  border-bottom: 1px solid #f0ede8;
+
+  &.unread {
+    background: #fff6e9;
+  }
+
+  .message {
+    font-size: 13px;
+    color: #5a4a42;
+  }
+
+  .time {
+    font-size: 11px;
+    color: #b8b6a8;
+  }
+}
+
+/* フッター */
+.notification-footer {
+  text-align: center;
+  margin-top: 8px;
+
+  a {
+    font-size: 12px;
+    color: #c08a5b;
+  }
 }

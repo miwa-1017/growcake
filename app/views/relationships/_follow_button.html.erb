@@ -1,14 +1,22 @@
 <% if user_signed_in? && current_user != user %>
-  <% if current_user.following?(user) %>
-    <% relationship = current_user.active_relationships.find_by(followed: user) %>
-    <%= button_to "フォロー解除",
-          relationship_path(relationship),
-          method: :delete,
-          remote: true %>
-  <% else %>
-    <%= button_to "フォロー",
-          relationships_path(followed_id: user.id),
-          method: :post,
-          remote: true %>
-  <% end %>
+  <div class="follow-area">
+    <% if current_user.following?(user) %>
+      <% relationship = current_user.active_relationships.find_by(followed: user) %>
+      <%= button_to relationship_path(relationship),
+            method: :delete,
+            remote: true,
+            class: "follow-btn icon-btn" do %>
+        <%= image_tag "follow_active.png", alt: "フォロー解除", class: "follow-icon" %>
+        <span class="like-text">フォローをやめる</span>
+      <% end %>
+    <% else %>
+      <%= button_to relationships_path(followed_id: user.id),
+            method: :post,
+            remote: true,
+            class: "follow-btn icon-btn" do %>
+        <%= image_tag "follow_default.png", alt: "フォロー", class: "follow-icon" %>
+        <span class="like-text">フォローする</span>
+      <% end %>
+    <% end %>
+  </div>
 <% end %>

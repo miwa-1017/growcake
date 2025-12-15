@@ -29,8 +29,23 @@
   }
 }
 
-.follow-button-area {
-  margin-top: 12px;
+
+
+.follow-area {
   display: flex;
-  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.follow-icon {
+  width: 42px;   // お好みで調整
+  height: auto;
+  display: block;
 }

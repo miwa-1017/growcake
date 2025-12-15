@@ -1,9 +1,12 @@
 <header class="site-header px-4 py-3">
 
   <% if user_signed_in? %>
-    <div class="search-area d-flex mb-2">
+    <!-- 検索バー -->
+    <div class="search-area d-flex">
       <%= form_with url: users_path, method: :get, local: true, class: "d-flex" do |f| %>
-        <%= f.text_field :keyword, placeholder: "ユーザー名で検索", class: "form-control me-2" %>
+        <%= f.text_field :keyword,
+              placeholder: "ユーザー名で検索",
+              class: "form-control me-2" %>
         <%= f.submit "🔍", class: "search-button" %>
       <% end %>
     </div>
@@ -18,47 +21,90 @@
       <% end %>
     </div>
 
-    <!-- ナビゲーション -->
+    <!-- ナビ -->
     <nav class="header-nav d-flex align-items-center">
 
       <% if user_signed_in? %>
+
         <span class="welcome-text me-4">
           ようこそ、
           <%= current_user.guest? ? "ゲストさん" : "#{current_user.name} さん" %>
         </span>
-      <% end %>
 
-      <%= link_to "About", about_path, class: "nav-link me-3" %>
-
-      <% if user_signed_in? %>
+        <%= link_to "About", about_path, class: "nav-link me-3" %>
         <%= link_to "投稿一覧", posts_path, class: "nav-link me-3" %>
 
         <% unless current_user.guest? %>
-          <%= link_to notifications_path,
-              class: "notification-bell me-3 #{'has-unread' if current_user.notifications.unread.any?}" do %>
-            <i class="fa-regular fa-bell"></i>
+          <% unread_count = current_user.notifications.unread.count %>
 
-            <% unread_count = current_user.notifications.unread.count %>
-            <% if unread_count > 0 %>
-              <span class="notification-badge">
-                <%= unread_count > 9 ? "9+" : unread_count %>
-              </span>
+          <div class="header-icons d-flex align-items-center">
+
+                <div class="notification-wrapper">
+                  <!-- 🔔 トグル -->
+                  <button
+                    id="notificationToggle"
+                    class="header-icon notification-bell me-3 <%= 'has-unread' if unread_count > 0 %>"
+                    type="button"
+                  >
+                    <%= image_tag "bell.png", class: "header-icon-img", alt: "通知" %>
+
+                    <% if unread_count > 0 %>
+                      <span class="notification-badge">
+                        <%= unread_count > 9 ? "9+" : unread_count %>
+                      </span>
+                    <% end %>
+
+                    <span class="header-icon-text">通知</span>
+                  </button>
+
+                  <!-- ▼ ドロップダウン -->
+                  <div id="notificationDropdown" class="notification-dropdown">
+                    <% notifications = current_user.notifications.order(created_at: :desc).limit(5) %>
+
+                    <% if notifications.any? %>
+                      <% notifications.each do |notification| %>
+                        <div class="notification-item <%= 'unread' unless notification.read %>">
+                          <p class="message"><%= notification.message %></p>
+                          <span class="time">
+                            <%= time_ago_in_words(notification.created_at) %>前
+                          </span>
+                        </div>
+                      <% end %>
+
+                      <div class="notification-footer">
+                        <%= link_to "すべての通知を見る", notifications_path %>
+                      </div>
+                    <% else %>
+                      <p class="empty">通知はまだありません 🍰</p>
+                    <% end %>
+                  </div>
+                </div>
             <% end %>
-          <% end %>
 
-          <%= link_to "いいね一覧", likes_path, class: "nav-link me-3" %>
-          <%= link_to "マイページ", mypage_path, class: "nav-link me-3" %>
-        <% end %>
+            <!-- いいね -->
+            <%= link_to likes_path, class: "header-icon me-3" do %>
+              <%= image_tag "heart_active.png", class: "header-icon-img" %>
+              <span class="header-icon-text">いいね</span>
+            <% end %>
+
+            <!-- マイページ -->
+            <%= link_to mypage_path, class: "header-icon me-3" do %>
+              <%= image_tag "mypage-icon.png", class: "header-icon-img" %>
+              <span class="header-icon-text">マイページ</span>
+            <% end %>
+          </div>
 
         <%= link_to "ログアウト",
-            destroy_user_session_path,
-            method: :delete,
-            class: "nav-link me-3" %>
+              destroy_user_session_path,
+              method: :delete,
+              class: "nav-link me-3" %>
 
       <% else %>
-        <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "nav-link me-3" %>
+
+        <%= link_to "About", about_path, class: "nav-link me-3" %>
         <%= link_to "ログイン", new_user_session_path, class: "nav-link me-3" %>
         <%= link_to "新規登録", new_user_registration_path, class: "nav-link me-3" %>
+
       <% end %>
 
     </nav>

@@ -19,3 +19,4 @@ ActiveStorage.start()
 require("@rails/ujs").start()
 
 import "./confetti";
+import "../notification_dropdown";
