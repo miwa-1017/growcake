@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'invite/index'
   get 'notifications/index'
   get 'growth_records/index'
   #マイページ(一般ユーザー用)
@@ -17,11 +18,12 @@ Rails.application.routes.draw do
 
   authenticate :user do
     get '/mypage', to: 'mypage#show', as: 'mypage'
-    get '/mypage/edit', to: 'mypage#edit', as: :edit_mypage
     patch '/mypage', to: 'mypage#update'
   end
 
-  resources :users, only: [:show, :index, :destroy] do
+  get 'invite', to: 'invite#index'
+
+  resources :users, only: [:show, :index, :edit, :update, :destroy] do
     member do
       get :following
       get :followers

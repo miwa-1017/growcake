@@ -22,6 +22,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       format.js
+      format.html { redirect_back(fallback_location: likes_path) }
     end
   end
 

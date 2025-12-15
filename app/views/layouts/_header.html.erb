@@ -92,6 +92,12 @@
               <%= image_tag "mypage-icon.png", class: "header-icon-img" %>
               <span class="header-icon-text">マイページ</span>
             <% end %>
+
+            <!-- 友達紹介 -->
+            <%= link_to invite_path, class: "header-icon me-3" do %>
+              <%= image_tag "invite-icon.png", class: "header-icon-img" %>
+              <span class="header-icon-text">友達紹介</span>
+            <% end %>
           </div>
 
         <%= link_to "ログアウト",

@@ -12,11 +12,12 @@
 
       <%= f.submit "更新する", class: "btn" %>
     <% end %>
-
+    <div class="form-actions withdraw-area">
     <%= link_to "退会する", withdraw_mypage_path,
         method: :delete,
         data: { confirm: "本当に退会しますか？\n※データは削除され復元できません。" },
-        class: "btn btn-danger" %>
+        class: "btn btn-withdraw" %>
+    </div>
 
   </div>
 

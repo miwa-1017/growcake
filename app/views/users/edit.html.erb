@@ -1,0 +1,67 @@
+<div class="users-edit-wrapper">
+
+  <%= form_with model: @user, local: true do |f| %>
+    
+      <div class="form-group">
+      <label>
+        ユーザー名
+        <span class="required">必須</span>
+      </label>
+      <%= f.text_field :name, class: "form-input", placeholder: "例）みんみん" %>
+    </div>
+
+    <div class="profile-image-preview">
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, class: "profile-image" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", class: "profile-image" %>
+      <% end %>
+    </div>
+
+    <div class="form-group">
+      <%= f.file_field :profile_image, accept: "image/*" %>
+    </div>
+
+    <div class="form-group">
+      <label>
+        好きなケーキ
+        <span class="optional">任意</span>
+      </label>
+      <%= f.text_field :favorite_cake,
+            class: "form-input",
+            placeholder: "例）タルト、ショートケーキ、チーズケーキ" %>
+    </div>
+
+    <div class="form-group">
+      <label>
+        好きなケーキ屋さん
+        <span class="optional">任意</span>
+      </label>
+      <%= f.text_field :favorite_shop,
+            class: "form-input",
+            placeholder: "例）近所のパティスリーや、思い出のお店など" %>
+    </div>
+
+    <div class="form-group">
+      <label>
+        自己紹介
+        <span class="optional">任意</span>
+      </label>
+      <%= f.text_area :introduction, class: "form-textarea",
+            placeholder: "例）焼き菓子と成長記録が好きです🍰" %>
+
+    </div>
+
+    <%= f.submit "更新する", class: "btn mypage-btn-update" %>
+
+  <% end %>
+
+  <div class="withdraw-area">
+  <%= link_to "退会する", withdraw_user_path(current_user),
+          method: :delete,
+          data: { confirm: "本当に退会しますか？\n※データは削除され復元できません。" },
+          class: "btn btn-withdraw" %>
+
+  </div>
+
+</div>

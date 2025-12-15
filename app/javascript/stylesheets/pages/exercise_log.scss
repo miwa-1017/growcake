@@ -1,0 +1,11 @@
+.empty-state {
+  text-align: center;
+  margin: 24px 0;
+}
+
+.empty-image {
+  width: 300px;        // ← ここでサイズ調整
+  max-width: 70%;
+  margin-bottom: 12px;
+  opacity: 0.9;        // 主張しすぎ防止
+}

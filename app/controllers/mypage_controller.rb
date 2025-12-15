@@ -16,10 +16,6 @@ class MypageController < ApplicationController
     end
   end
 
-  def edit
-    @user = current_user
-  end
-
   private
 
   def set_current_user
