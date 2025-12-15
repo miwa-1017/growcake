@@ -6,8 +6,9 @@
       <%= render "users/user_card", user: user %>
     <% end %>
   <% else %>
-    <p class="empty-message">
-      まだ誰もフォローしていません
-    </p>
+      <div class="followers-empty">
+      <%= image_tag "empty_follow.png", class: "empty-image", alt: "まだフォロワーがいません" %>
+      <p class="empty-message">まだフォロワーがいません</p>
+      </div>
   <% end %>
 </div>

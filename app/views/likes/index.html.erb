@@ -21,12 +21,16 @@
           <%= button_to "いいね解除",
                         post_like_path(post),
                         method: :delete,
+                        remote: true,
                         class: "likes-unlike-btn",
                         data: { confirm: "いいねを解除しますか？" } %>
         </li>
       <% end %>
     </ul>
   <% else %>
-    <p class="likes-empty">まだいいねした投稿はありません</p>
+    <div class="likes-empty">
+      <%= image_tag "empty_like.png", class: "empty-image", alt: "いいねがまだありません" %>
+      <p class="likes-empty-text">まだいいねした投稿はありません</p>
+    </div>
   <% end %>
 </div>

@@ -34,8 +34,8 @@ ja:
       destroyed: "アカウントを削除しました…"
 
     sessions:
-      signed_in: "ログインしました。"
-      signed_out: "ログアウトしました。"
+      signed_in: ""
+      signed_out: ""
       new:
         submit: "ログイン"
 

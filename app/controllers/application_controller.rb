@@ -5,18 +5,19 @@ class ApplicationController < ActionController::Base
 
 protected
 
+
+  def after_sign_up_path_for(resource)
+    flash[:notice] = "はじめまして 🌱 Grow Cakeへようこそ"
+    root_path
+  end
+
   def after_sign_in_path_for(resource)
-    flash[:notice] = "今日もGrow Cakeへようこそ 🍰"
+    flash[:notice] ||= "今日もGrow Cakeへようこそ 🍰"
     super
   end
 
   def after_sign_out_path_for(resource_or_scope)
     flash[:notice] = "今日もおつかれさまでした 🌙"
-    super
-  end
-
-  def after_sign_up_path_for(resource)
-    flash[:notice] = "はじめまして 🌱 Grow Cakeへようこそ"
     super
   end
 

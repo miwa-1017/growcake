@@ -30,7 +30,10 @@
       <% end %>
     </ul>
   <% else %>
-    <p>まだログがありません</p>
+    <div class="empty-state">
+      <%= image_tag "growcake.png", class: "empty-image" %>
+      <p>まだログがありません</p>
+    </div>
   <% end %>
 
   <div class="back-btn mt-4">
