@@ -165,3 +165,14 @@ input.mypage-btn-update:hover {
   background-color: #dca3ab; // 少しだけ濃く
   border-color: #dca3ab;
 }
+
+.error-message {
+  color: #c05672;
+  font-size: 12px;
+  margin-top: 4px;
+  margin-bottom: 0;
+}
+.field-with-error input,
+.field-with-error textarea {
+  border-color: #f1a7b5;
+}

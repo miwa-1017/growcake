@@ -8,8 +8,17 @@
   <% end %>
   
   <p class="post-meta">
-    👤 投稿者：<%= @post.user.is_deleted? ? "退会済みユーザー" : @post.user.name %><br>
-    📅 投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
+    投稿者：
+    <% if @post.user.is_deleted? %>
+      退会済みユーザー
+    <% elsif user_signed_in? && !current_user.guest? && @post.user != current_user %>
+      <%= link_to @post.user.name, user_path(@post.user), class: "user-link" %>
+    <% else %>
+      <span class="user-name-text"><%= @post.user.name %></span>
+    <% end %>
+    <br>
+    投稿日：
+    <%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
   </p>
 
 

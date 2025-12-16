@@ -33,19 +33,44 @@
 
     <h2 class="posts-title">みんなの投稿</h2>
 
+    <% if @posts.any? %>
+      <!-- 投稿があるとき -->
+      <div class="posts-container">
+        <% @posts.each do |post| %>
+          <!-- 投稿カード -->
+        <% end %>
+      </div>
+
+    <% else %>
+      <!-- 投稿が0件のとき（検索結果なし） -->
+      <div class="empty-state">
+        <%= image_tag "empty_growth_record.png", class: "empty-image" %>
+        <p class="empty-text">
+          条件に合う投稿は見つかりませんでした<br>
+          条件を変えて探してみてください
+        </p>
+      </div>
+    <% end %>
+
     <div class="posts-container">
       <% @posts.each do |post| %>
         <div class="post-card stage-<%= post.stage %>">
         <p class="post-user-name">
-          <%= link_to post.user.name, user_path(post.user), class: "user-link" %>
+          <% if user_signed_in? && !current_user.guest? && post.user != current_user %>
+            <%= link_to post.user.name, user_path(post.user), class: "user-link" %>
+          <% else %>
+            <span class="user-name-text"><%= post.user.name %></span>
+          <% end %>
         </p>
         <p class="post-date">📅 <%= post.created_at.strftime("%Y/%m/%d") %></p>
 
+        <%= link_to post_path(post), class: "post-image-link" do %>
           <% if post.image.attached? %>
             <%= image_tag "cakes/#{post.cake_type_at_post}_stage_#{format("%02d", post.stage)}.png", class: "post-card-img" %>
           <% else %>
             <%= image_tag "cakes/cake_stage_01.png", class: "post-card-img default-img" %>
           <% end %>
+        <% end %>
 
           <div class="post-card-content">
             <p class="post-exercise">

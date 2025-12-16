@@ -193,3 +193,13 @@
   gap: 6px;
   white-space: nowrap; // ← 文字折り返し防止
 }
+/*投稿一覧の画像を押すとふわっと浮く*/
+.post-image-link {
+  display: inline-block;
+}
+
+.post-image-link:hover {
+  opacity: 0.9;
+  transform: translateY(-2px);
+  transition: 0.2s;
+}
