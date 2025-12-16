@@ -32,7 +32,7 @@
 ・SNSで「今日のケーキ」を共有したいとき  
 ​
 ## ER図
-<img src="./Growcake_ERD.png" width="600">
+<img src="./Growcake_ER.png" width="600">
  
 ​
 ## 開発環境
