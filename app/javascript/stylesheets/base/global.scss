@@ -1,8 +1,15 @@
 body {
   background-color: #f6f1e2;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   color: #5B4A42;          
   line-height: 1.8;
   font-family: 'Zen Maru Gothic', serif;
+}
+
+main{
+  flex: 1;
 }
 
 h1, h2 {
@@ -25,4 +32,17 @@ a:hover {
 ul {
   list-style: none;
   padding: 0;
+}
+
+.auth-input {
+  border-radius: 12px;
+  border: 1px solid #e6d8c8;
+  padding: 12px 14px;
+  font-size: 14px;
+  background: #fff;
+}
+
+.auth-input:focus {
+  outline: none;
+  border-color: #d8b4a0;
 }

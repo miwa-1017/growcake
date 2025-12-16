@@ -5,6 +5,22 @@ class ApplicationController < ActionController::Base
 
 protected
 
+
+  def after_sign_up_path_for(resource)
+    flash[:notice] = "はじめまして 🌱 Grow Cakeへようこそ"
+    root_path
+  end
+
+  def after_sign_in_path_for(resource)
+    flash[:notice] ||= "今日もGrow Cakeへようこそ 🍰"
+    super
+  end
+
+  def after_sign_out_path_for(resource_or_scope)
+    flash[:notice] = "今日もおつかれさまでした 🌙"
+    super
+  end
+
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])

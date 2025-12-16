@@ -1,0 +1,10 @@
+<div class="user-card">
+  <%= link_to user.name, user_path(user), class: "user-name-link" %>
+
+  <div
+    id="follow_button_<%= user.id %>"
+    class="follow-button-area"
+  >
+    <%= render "relationships/follow_button", user: user %>
+  </div>
+</div>

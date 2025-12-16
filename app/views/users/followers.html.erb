@@ -1,0 +1,14 @@
+<div class="users-wrapper">
+  <h2><%= @user.name %> をフォローしているユーザー</h2>
+
+  <% if @users.any? %>
+    <% @users.each do |user| %>
+      <%= render "users/user_card", user: user %>
+    <% end %>
+  <% else %>
+      <div class="followers-empty">
+      <%= image_tag "empty_follow.png", class: "empty-image", alt: "まだフォロワーがいません" %>
+      <p class="empty-message">まだフォロワーがいません</p>
+      </div>
+  <% end %>
+</div>

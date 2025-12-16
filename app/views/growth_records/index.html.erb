@@ -24,7 +24,10 @@
     <hr>
   <% end %>
 <% else %>
-  <p>🍀まだ成長履歴がありません✨</p>
+  <div class="growth-record-empty">
+      <%= image_tag "empty_growth_record.png", class: "empty-image", alt: "まだ成長履歴がありません" %>
+      <p class="growth-record-empty-text">まだ成長履歴がありません</p>
+  </div>
 <% end %>
 
   <div class="back-btn mt-4">

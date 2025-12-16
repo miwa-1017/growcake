@@ -4,12 +4,33 @@
   <% if @likes.any? %>
     <ul class="likes-list">
       <% @likes.each do |like| %>
+        <% post = like.post %>
+
         <li class="likes-item">
-          <%= link_to like.post.title, post_path(like.post), class: "likes-link" %>
+          <!-- 投稿本文（リンク） -->
+          <%= link_to "投稿を見る", post_path(like.post), class: "likes-link" %>
+          <p class="likes-meta">
+            投稿者：
+            <%= post.user.is_deleted? ? "退会済みユーザー" : post.user.name %>
+            <br>
+            投稿日：
+            <%= post.created_at.strftime("%Y/%m/%d %H:%M") %>
+          </p>
+
+          <!-- いいね解除 -->
+          <%= button_to "いいね解除",
+                        post_like_path(post),
+                        method: :delete,
+                        remote: true,
+                        class: "likes-unlike-btn",
+                        data: { confirm: "いいねを解除しますか？" } %>
         </li>
       <% end %>
     </ul>
   <% else %>
-    <p class="likes-empty">まだいいねした投稿はありません</p>
+    <div class="likes-empty">
+      <%= image_tag "empty_like.png", class: "empty-image", alt: "いいねがまだありません" %>
+      <p class="likes-empty-text">まだいいねした投稿はありません</p>
+    </div>
   <% end %>
 </div>

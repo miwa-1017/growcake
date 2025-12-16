@@ -1,19 +1,9 @@
 <div class="exercise-wrapper text-center">
   <h1 class="exercise-title">運動ログ一覧</h1>
 
-  <% if current_user.email == "guest@example.com" && current_user.exercise_logs.exists? %>
-    <p>✨体験版モードです</p>
-    <p>これ以上投稿するには会員登録してください</p>
-
-    <div class="guest-actions">
-      <%= link_to "投稿一覧を見る", posts_path, class: "btn btn-secondary" %><br>
-      <%= link_to "新規登録する", new_user_registration_path, class: "btn btn-primary" %>
-    </div>
-  <% else %>
     <%= link_to "今日の運動を記録する", new_exercise_log_path, class: "btn btn-primary" %>
-  <% end %>
 
-  <p>累計ポイント：<%= current_user.growth_logs.sum(:growth_point) %> pt </p>
+  <p class="total-point">累計ポイント：<%= current_user.growth_logs.sum(:growth_point) %> pt </p>
 
   <% if @exercise_logs.any? %>
     <ul>
@@ -30,7 +20,10 @@
       <% end %>
     </ul>
   <% else %>
-    <p>まだログがありません</p>
+    <div class="empty-state">
+      <%= image_tag "growcake.png", class: "empty-image" %>
+      <p>まだログがありません</p>
+    </div>
   <% end %>
 
   <div class="back-btn mt-4">

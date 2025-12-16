@@ -1,7 +1,7 @@
 class MypageController < ApplicationController
   before_action :set_current_user
-  before_action :forbid_guest, only: [:update]
   before_action :authenticate_user!
+  before_action :reject_guest_user, only: [:show, :edit, :update]
 
   def show
     @user = current_user
@@ -16,10 +16,6 @@ class MypageController < ApplicationController
     end
   end
 
-  def edit
-    @user = current_user
-  end
-
   private
 
   def set_current_user
@@ -31,5 +27,11 @@ class MypageController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :cake_type)
+  end
+
+  def reject_guest_user
+    if current_user.guest?
+      redirect_to posts_path, alert: "ゲストユーザーはマイページを利用できません"
+    end
   end
 end

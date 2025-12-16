@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'invite/index'
+  get 'notifications/index'
   get 'growth_records/index'
   #マイページ(一般ユーザー用)
   #get 'cake_types/edit'
@@ -16,12 +18,15 @@ Rails.application.routes.draw do
 
   authenticate :user do
     get '/mypage', to: 'mypage#show', as: 'mypage'
-    get '/mypage/edit', to: 'mypage#edit', as: :edit_mypage
     patch '/mypage', to: 'mypage#update'
   end
 
-  resources :users, only: [:show, :index, :destroy] do
+  get 'invite', to: 'invite#index'
+
+  resources :users, only: [:show, :index, :edit, :update, :destroy] do
     member do
+      get :following
+      get :followers
       patch :withdraw
     end
   end
@@ -34,6 +39,7 @@ Rails.application.routes.draw do
     resource :like, only: [:create, :destroy]
   end
   resources :likes, only: [:index]
+  resources :relationships, only: [:create, :destroy]
   resources :exercise_logs, only: [:index, :new, :create]
   resources :growth_logs, only: [ :create]
   get '/growth', to: 'growth#show', as: :growth
@@ -43,6 +49,7 @@ Rails.application.routes.draw do
     delete :withdraw, to:"users#withdraw"
   end
   resources :growth_records, only:[:index, :create]
+  resources :notifications, only: [:index, :show]
 
   #====管理者用==========
     namespace :admin do

@@ -1,14 +1,57 @@
 <div class="exercise-wrapper text-center">
 
+  <!-- 既存 -->
   <h2><%= @user.name %> さんのページ</h2>
   <p>メールアドレス：非公開</p>
 
- 
+  <!-- ここからプロフィール表示を追加 -->
+  <div class="profile-show-wrapper mt-5">
 
-  <div class="mypage-actions mt-4">
-    <%= link_to "このユーザーの成長のあしあとを見る", growth_records_path(user_id: @user.id), class: "btn" %>
+    <!-- プロフィール画像 -->
+    <div class="profile-image-preview">
+      <% if @user.profile_image.attached? %>
+        <%= image_tag @user.profile_image, class: "profile-image" %>
+      <% else %>
+        <%= image_tag "default_avatar.png", class: "profile-image" %>
+      <% end %>
+    </div>
+
+    <!-- 好きなケーキ -->
+    <% if @user.favorite_cake.present? %>
+      <p class="profile-item">
+        <strong>好きなケーキ：</strong>
+        <%= @user.favorite_cake %>
+      </p>
+    <% end %>
+
+    <!-- 好きなケーキ屋さん -->
+    <% if @user.favorite_shop.present? %>
+      <p class="profile-item">
+        <strong>好きなケーキ屋さん：</strong>
+        <%= @user.favorite_shop %>
+      </p>
+    <% end %>
+
+    <!-- 自己紹介 -->
+    <% if @user.introduction.present? %>
+      <div class="profile-item">
+        <strong>自己紹介</strong>
+        <p><%= simple_format(@user.introduction) %></p>
+      </div>
+    <% end %>
+
+    <%= link_to "フォロー中", following_user_path(@user), class: "btn mt-3" %>
+    <%= link_to "フォロワー", followers_user_path(@user), class: "btn mt-3" %>
+
+    <div class="mypage-actions mt-4">
+      <%= link_to "このユーザーの成長のあしあとを見る",
+            growth_records_path(user_id: @user.id),
+            class: "btn" %>
+    </div>
+
   </div>
 
+  <!-- 戻るボタン（既存） -->
   <div class="back-btn mt-4">
     <%= link_to "戻る", request.referer || root_path, class: "btn" %>
   </div>

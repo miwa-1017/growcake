@@ -8,8 +8,17 @@
   <% end %>
   
   <p class="post-meta">
-    👤 投稿者：<% @post.user.name %><br>
-    📅 投稿日：<%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
+    投稿者：
+    <% if @post.user.is_deleted? %>
+      退会済みユーザー
+    <% elsif user_signed_in? && !current_user.guest? && @post.user != current_user %>
+      <%= link_to @post.user.name, user_path(@post.user), class: "user-link" %>
+    <% else %>
+      <span class="user-name-text"><%= @post.user.name %></span>
+    <% end %>
+    <br>
+    投稿日：
+    <%= @post.created_at.strftime("%Y/%m/%d %H:%M") %>
   </p>
 
 
@@ -23,31 +32,24 @@
       </div>
     <% end %>
 
-    <div class="post-actions">
-      <% if user_signed_in? %>
-        <div class="like-area">
-          <% if current_user.liked?(@post) %>
-            <%= button_to "いいね解除❤️ #{@post.likes.count}",
-                post_like_path(@post),
-                method: :delete,
-                class: "btn like-btn liked" %>
-          <% else %>
-            <%= button_to "いいね🤍 #{@post.likes.count}",
-                post_like_path(@post),
-                method: :post,
-                class: "btn like-btn" %>
-          <% end %>
+      <div class="post-actions">
+        <div id="like_button_<%= @post.id %>">
+          <%= render "likes/like_button", post: @post %>
         </div>
-      <% end %>
 
-      <% if @post.user == current_user %>
-        <%= link_to "編集", edit_post_path(@post), class: "btn" %>
-        <%= link_to "削除", @post,
-            method: :delete,
-            data: { confirm: "削除してもいい？" },
-            class: "btn btn-danger" %>
-      <% end %>
-    </div>
+        <div id="follow_button_<%= @post.user.id %>">
+          <%= render "relationships/follow_button", user: @post.user %>
+        </div>
+              
+
+        <% if @post.user == current_user %>
+          <%= link_to "編集", edit_post_path(@post), class: "btn" %>
+          <%= link_to "削除", @post,
+              method: :delete,
+              data: { confirm: "削除してもいい？" },
+              class: "btn btn-danger" %>
+        <% end %>
+      </div>
 
     <hr>
 

@@ -1,26 +1,30 @@
 @use '~bootstrap/scss/bootstrap';
 
-@import "base/reset";
-@import "base/variables";
 @import "base/global";
 @import "base/buttons";
 
 @import "components/cards";
 @import "components/forms";
-@import "components/table";
 @import "components/animations";
 
 
 @import "layouts/header";
-@import "layouts/footer";
+@import "layouts/_footer";
 
 @import "pages/home";
 @import "pages/posts";
 @import "pages/growth_records";
+@import "pages/exercise_log";
 @import "pages/admin";
 @import "pages/growth";
 @import "pages/devise";
 @import "pages/mypage";
 @import "pages/likes";
+@import "pages/follows";
+@import "pages/notification";
+@import "pages/invite";
+
+
+
 
 

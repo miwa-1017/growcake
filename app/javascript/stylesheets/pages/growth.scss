@@ -22,17 +22,18 @@
   background-color: #f7e4c4; // キャラメル/焼き菓子色
 }
 
-/* ===== 成長ステージ背景カラー（ピンク統一Ver） ===== */
+/* ===== 成長ステージ背景カラー（焼き菓子ベージュ統一） ===== */
 
-.stage-1 { background-color: #ffeaf4; }    /* ほぼ白に近い薄ピンク */
-.stage-2 { background-color: #ffe5f2; }
-.stage-3 { background-color: #ffdee7; }
-.stage-4 { background-color: #f1E0EA; }
-.stage-5 { background-color: #f1E0EA; }
-.stage-6 { background-color: #f2d9df; }
-.stage-7 { background-color: #ffcec3; }
-.stage-8 { background-color: #f4C1C0; }
-.stage-9 { background-color: #ffB6C1; }  /* 最終ステージ濃いめ可愛く */
+.stage-0 { background-color: #F8F5F0; } // ほぼ白・小麦粉
+.stage-1 { background-color: #F3EDE4; } // 薄ベージュ
+.stage-2 { background-color: #EDE3D5; } // クッキー生地
+.stage-3 { background-color: #E5D6C3; } // 焼き始め
+.stage-4 { background-color: #DCC7AD; } // ほんのり焼き色
+.stage-5 { background-color: #D2B99A; } // キャラメル前
+.stage-6 { background-color: #C8AB88; } // 焼き菓子色
+.stage-7 { background-color: #BE9E79; } // しっかり焼き色
+.stage-8 { background-color: #B3906A; } // 濃いキャラメル
+.stage-9 { background-color: #b8956e; } // 完成・最終
 
 .cake-select {
   text-align: center;

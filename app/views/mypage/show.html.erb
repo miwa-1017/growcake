@@ -1,54 +1,132 @@
-<div class="exercise-wrapper text-center">
+<div class="mypage">
+  <div class="exercise-wrapper text-center">
 
-  <% if guest_user? && @user.present? %>
-    <h2><%= @user.name %> さんのページ</h2>
-    <p>メールアドレス：<%= @user.email %></p>
-
-    <div class="mypage-actions">
-      <%= link_to "投稿一覧を見る", posts_path, class: "btn" %>
+    <!-- =====================
+        プロフィール
+    ====================== -->
+    <div class="mypage-profile">
+      <h2><%= current_user.name %> さんのページ</h2>
+      <p>メールアドレス：<%= current_user.email %></p>
     </div>
 
-    <%# ここでゲスト専用表示は終了 %>
-    <% return %>
-  <% end %>
-    <h2><%= @user.name %> さんのページ</h2>
-    <p>メールアドレス：<%= @user.email %></p>
+    
+    <div class="section-divider">
+    <%= image_tag "mypage/grass-divider.png", alt: "" %>
+    </div>
+    
 
-    <div class="cake-select">
+    <!-- =====================
+        交流（フォロー・いいね）
+    ====================== -->
+    <div class="mypage-section">
+      <div class="section-header">
+        <%= image_tag "mypage/icon-communication.png", class: "section-icon" %>
+        <h3>交流</h3>
+      </div>
 
-    <h3>ケーキタイプ設定</h3>
+      <div class="mypage-actions">
+        <%= link_to "フォロー中", following_user_path(current_user), class: "btn mypage-btn" %>
+        <%= link_to "フォロワー", followers_user_path(current_user), class: "btn mypage-btn" %>
+        <%= link_to "いいね一覧", likes_path, class: "btn mypage-btn-outline" %>
+        <%= link_to "通知", notifications_path, class: "btn mypage-btn" %>
+      </div>
+    </div>
+    
+    <div class="section-divider">
+    <%= image_tag "mypage/grass-divider.png", alt: "" %>
+    </div>
+    
 
-      <% if current_user.cake_type == "unset" %>
-        <%# 初回選択フォーム %>
-        <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
-          <div class="cake-select-box">
-            <%= f.radio_button :cake_type, :tart %> タルト<br>
-            <%= f.radio_button :cake_type, :cake %> ショートケーキ<br>
-          </div>
-          <%= f.submit "決定する", class: "btn mt-3" %>
+    <!-- =====================
+        投稿
+    ====================== -->
+    <div class="mypage-section">
+      <div class="section-header">
+        <%= image_tag "mypage/icon-post.png", class: "section-icon" %>
+        <h3>投稿</h3>
+      </div>
+
+      <div class="mypage-actions">
+        <%= link_to "投稿一覧を見る", posts_path, class: "btn mypage-btn" %>
+      </div>
+    </div>
+    
+    <div class="section-divider">
+    <%= image_tag "mypage/grass-divider.png", alt: "" %>
+    </div>
+    
+
+    <!-- =====================
+        成長・記録
+    ====================== -->
+    <div class="mypage-section">
+      <div class="section-header">
+        <%= image_tag "mypage/icon-growth.png", class: "section-icon section-icon--growth" %>
+        <h3>成長・記録</h3>
+      </div>
+
+      <p class="mt-2">現在の成長ポイント：<%= @growth_point %>pt</p>
+
+      <div class="mypage-actions">
+        <% if current_user.growth_logs.exists? %>
+          <%= link_to "ケーキを育てる<br>投稿する".html_safe, growth_path, class: "btn mypage-btn" %>
+        <% else %>
+          <%= link_to "ケーキを育てる", growth_path, class: "btn mypage-btn" %>
         <% end %>
-      <% else %>
-        <p>あなたのケーキタイプ：<strong><%= cake_type_name(current_user.cake_type) %></strong></p>
-        <%= link_to "変更する", edit_cake_type_path, class: "btn mt-3" %>
-      <% end %>
 
-    <p class="mt-4">現在の成長ポイント：<%= @growth_point %>pt</p>
-
-    <div class="mypage-actions">
-
-      <% if current_user.growth_logs.exists? %>
-        <%= link_to "ケーキを育てる<br>投稿する".html_safe, growth_path, class: "btn" %>
-      <% else %>
-        <%= link_to "ケーキを育てる", growth_path, class: "btn" %>
-      <% end %>
-      <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn btn-outline" %>
-      <%= link_to "ケーキの成長履歴を見る", growth_records_path, class: "btn" %>
-      <%= link_to "マイページ情報を編集する", edit_mypage_path, class: "btn btn-outline" %>
-
-
-      <div class="back-btn mt-4">
-        <%= link_to "戻る", request.referer || root_path, class: "btn" %>
+        <%= link_to "筋トレ記録を見る", exercise_logs_path, class: "btn mypage-btn-outline" %>
+        <%= link_to "ケーキの成長履歴を見る", growth_records_path, class: "btn mypage-btn" %>
       </div>
     </div>
 
+    <div class="section-divider">
+    <%= image_tag "mypage/grass-divider.png", alt: "" %>
+    </div>
+
+    <!-- =====================
+        設定
+    ====================== -->
+    <div class="mypage-section">
+      <div class="section-header">
+        <%= image_tag "mypage/icon-setting.png", class: "section-icon" %>
+        <h3>設定</h3>
+      </div>
+
+      <div class="cake-select">
+        <h4>ケーキタイプ設定</h4>
+
+        <% if current_user.cake_type == "unset" %>
+          <%= form_with model: current_user, url: cake_type_path, method: :patch, local: true do |f| %>
+            <div class="cake-select-box">
+              <%= f.radio_button :cake_type, :tart %> タルト<br>
+              <%= f.radio_button :cake_type, :cake %> ショートケーキ<br>
+            </div>
+            <%= f.submit "決定する", class: "btn mypage-btn mt-3" %>
+          <% end %>
+        <% else %>
+          <p>
+            あなたのケーキタイプ：
+            <strong><%= cake_type_name(current_user.cake_type) %></strong>
+          </p>
+          <%= link_to "変更する", edit_cake_type_path, class: "btn mypage-btn mt-3" %>
+        <% end %>
+      </div>
+
+      <div class="mypage-actions mt-3">
+        <%= link_to "マイページ情報を編集する", edit_user_path(current_user), class: "btn mypage-btn-outline" %>
+      </div>
+    </div>
+
+    <div class="section-divider">
+    <%= image_tag "mypage/grass-divider.png", alt: "" %>
+    </div>
+    
+    <!-- =====================
+        戻る
+    ====================== -->
+    <div class="back-btn mt-5">
+      <%= link_to "戻る", request.referer || root_path, class: "btn mypage-btn" %>
+    </div>
+
+  </div>
 </div>

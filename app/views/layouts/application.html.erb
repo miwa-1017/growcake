@@ -13,64 +13,15 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-      <header class="site-header px-4 py-3">
-
-       <% if user_signed_in? %>
-        <div class="search-area d-flex">
-          <%= form_with url: users_path, method: :get, local: true, class: "d-flex" do |f| %>
-            <%= f.text_field :keyword, placeholder: "ユーザー名で検索", class: "form-control me-2" %>
-            <%= f.submit "🔍", class: "search-button" %>
-          <% end %>
+      <%= render "layouts/header" %>
+      <% if flash[:notice] %>
+        <div class="toast-message">
+          <%= flash[:notice] %>
         </div>
       <% end %>
-
-      <div class="d-flex justify-content-between align-items-center">
-
-                <!-- ロゴ（左寄せ） -->
-                <div class="header-logo">
-                  <%= link_to root_path do %>
-                    <%= image_tag "growcake_logo.png", class: "logo-img" %>
-                  <% end %>
-                </div>
-
-                <!-- ナビゲーション（右寄せ） -->
-                <nav class="header-nav header-nav d-flex align-items-center">
-                    <% if user_signed_in? %>
-                      <% if current_user.email == "guest@example.com" %>
-                        <span class="welcome-text me-4">ようこそ、ゲストさん</span>
-                      <% else %>
-                        <span class="welcome-text me-4">ようこそ、<%= current_user.name %> さん</span>
-                      <% end %>
-                    <% end %>
-
-                  <%= link_to "About", about_path, class: 'nav-link me-3' %>
-
-                  <% if user_signed_in? %>
-                  <%= link_to "投稿一覧", posts_path, class: "nav-link me-3" %>
-
-                  <% unless current_user.guest? %>
-                    <%= link_to "いいね一覧", likes_path, class: "nav-link me-3" %>
-                  <% end %>
-
-                <% if current_user.email == "guest@example.com" %>
-                    <span class="nav-link disabled-link">ゲストユーザー</span>
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link me-3" %>
-                  <% else %>
-                    <%= link_to "マイページ", mypage_path, class: "nav-link me-3" %>
-                    <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "nav-link me-3" %>
-                  <% end %>
-                  <% else %>
-                    <%= link_to "ゲストログイン", users_guest_sign_in_path, method: :post, class: "nav-link me-3" %>
-                    <%= link_to "ログイン", new_user_session_path, class: "nav-link me-3" %>
-                    <%= link_to "新規登録", new_user_registration_path, class: "nav-link me-3" %>
-                  <% end %>
-
-
-                </nav>
-            </header>
-          <%= yield %>
-        </body>
-      </div>
+        <main>
+      <%= yield %>
+        </main>
+      <%= render "layouts/footer" %>
+  </body>
 </html>

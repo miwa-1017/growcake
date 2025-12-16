@@ -21,7 +21,7 @@ class ExerciseLogsController < ApplicationController
       #成長ポイント履歴を保存
       current_user.growth_logs.create(growth_point: points)
 
-      redirect_to exercise_logs_path, notice: "運動ログ追加！ +#{points}pt 🏋️‍♀️✨"
+      redirect_to exercise_logs_path, notice: "おつかれさま +#{points}pt 🏋️‍♀️✨"
     else
       render :new
     end
