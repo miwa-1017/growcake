@@ -4,8 +4,14 @@
 }
 
 .empty-image {
-  width: 300px;        // ← ここでサイズ調整
+  width: 300px;        
   max-width: 70%;
   margin-bottom: 12px;
-  opacity: 0.9;        // 主張しすぎ防止
+  opacity: 0.9;        
+}
+
+.total-point {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #b39a6a; 
 }

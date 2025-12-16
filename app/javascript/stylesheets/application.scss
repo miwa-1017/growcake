@@ -1,13 +1,10 @@
 @use '~bootstrap/scss/bootstrap';
 
-@import "base/reset";
-@import "base/variables";
 @import "base/global";
 @import "base/buttons";
 
 @import "components/cards";
 @import "components/forms";
-@import "components/table";
 @import "components/animations";
 
 
