@@ -1,4 +1,4 @@
-<% if user_signed_in? && current_user != user %>
+<% if user_signed_in? && !current_user.guest? && current_user != user %>
   <div class="follow-area">
     <% if current_user.following?(user) %>
       <% relationship = current_user.active_relationships.find_by(followed: user) %>
@@ -7,7 +7,7 @@
             remote: true,
             class: "follow-btn icon-btn" do %>
         <%= image_tag "follow_active.png", alt: "フォロー解除", class: "follow-icon" %>
-        <span class="like-text">フォローをやめる</span>
+        <span class="follow-text">フォローをやめる</span>
       <% end %>
     <% else %>
       <%= button_to relationships_path(followed_id: user.id),
@@ -15,7 +15,7 @@
             remote: true,
             class: "follow-btn icon-btn" do %>
         <%= image_tag "follow_default.png", alt: "フォロー", class: "follow-icon" %>
-        <span class="like-text">フォローする</span>
+        <span class="follow-text">フォローする</span>
       <% end %>
     <% end %>
   </div>

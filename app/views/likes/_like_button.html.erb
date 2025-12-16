@@ -1,5 +1,7 @@
-<% if user_signed_in? && current_user != post.user %>
-  <div class="like-area">
+<% can_like = user_signed_in? && !current_user.guest? && current_user != post.user %>
+
+<div class="like-area">
+  <% if can_like %>
     <% if current_user.liked?(post) %>
       <%= button_to post_like_path(post),
           method: :delete,
@@ -19,5 +21,14 @@
         <span class="like-count"><%= post.likes.count %></span>
       <% end %>
     <% end %>
-  </div>
-<% end %>
+
+  <% else %>
+    <%# ← ボタンが出ないとき（自分の投稿など） %>
+    <% if post.likes.any? %>
+      <span class="like-count">
+        <%= image_tag "heart_active.png", alt: "いいね数", class: "like-icon small" %>
+        <%= post.likes.count %>
+      </span>
+    <% end %>
+  <% end %>
+</div>

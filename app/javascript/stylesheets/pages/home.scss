@@ -21,3 +21,11 @@
   height: auto;
   margin-top: 20px;
 }
+/*検索バーのエンプティステート表示*/
+
+.empty-image {
+  display: block;
+  margin: 0 auto;
+  max-width: 320px;
+  opacity: 0.9;
+}
