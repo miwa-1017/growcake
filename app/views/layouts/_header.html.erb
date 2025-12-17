@@ -31,12 +31,12 @@
           ようこそ、
           <%= current_user.guest? ? "ゲストさん" : "#{current_user.name} さん" %>
         </span>
-
+    
         <!-- 共通リンク -->
         <%= link_to "About", about_path, class: "nav-link me-3" %>
         <%= link_to "投稿一覧", posts_path, class: "nav-link me-3" %>
 
-        <% if current_user.guest? %>
+        <% if current_user&.guest? %>
           <!-- ゲスト専用表示 -->
           <span class="nav-link me-3 guest-text">ゲストログイン</span>
 

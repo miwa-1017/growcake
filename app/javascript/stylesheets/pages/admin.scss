@@ -145,19 +145,26 @@
 }
 
 /* BAN / UNBAN ボタン */
-.btn-ban,
-.btn-unban {
-  background: #4caf50;
+.admin-page{
+  .btn-ban,
+  .btn-unban {
+    background: #67c18c;
+    line-height: 45px;
 
-  &:hover {
-    background: #97FA9A;
+    &:hover {
+      background: #97FA9A;
+    }
+  }
+  a:hover{
+    transform: none;
+  }
+  a.btn-delete,
+  a.btn-ban{
+    vertical-align: middle;
+    box-sizing: border-box;
   }
 }
 
-/* BAN の緑色を優先 */
-.btn-ban {
-  background-color: #67c18c !important;
-}
 
 /* ---------- 戻るボタン ---------- */
 .btn-back {
