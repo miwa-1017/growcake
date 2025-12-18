@@ -52,3 +52,15 @@
   height: auto;
   display: block;
 }
+.follow-text {
+  color: #f7efe6; /* クリーム */
+  text-shadow: 0 1px 2px rgba(90, 60, 40, 0.25);
+}
+
+.follow-btn.icon-btn {
+  background-color: #B3906A; /* クリーム */
+  color: #6b4a2f; /* 焼き菓子ブラウン */
+  border-radius: 999px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+}
